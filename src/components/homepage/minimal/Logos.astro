@@ -1,0 +1,30 @@
+---
+const technologies = [
+  { name: "Astro", letter: "A" },
+  { name: "React", letter: "R" },
+  { name: "Tailwind", letter: "T" },
+  { name: "Stripe", letter: "S" },
+  { name: "OpenAI", letter: "O" },
+  { name: "Supabase", letter: "Su" },
+  { name: "Drizzle", letter: "D" },
+  { name: "Resend", letter: "Re" },
+];
+---
+
+<section class="py-16 border-y border-border/50">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <p class="text-center text-xs font-medium uppercase tracking-widest text-muted-foreground mb-8">
+      Built with the best tools
+    </p>
+    <div class="flex flex-wrap items-center justify-center gap-x-10 gap-y-6">
+      {technologies.map((tech) => (
+        <div class="flex items-center gap-2 text-muted-foreground/60 hover:text-muted-foreground transition-colors">
+          <div class="w-8 h-8 rounded-md border border-border/50 flex items-center justify-center text-xs font-bold">
+            {tech.letter}
+          </div>
+          <span class="text-sm font-medium">{tech.name}</span>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

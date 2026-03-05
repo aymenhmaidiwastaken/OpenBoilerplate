@@ -1,0 +1,33 @@
+---
+const technologies = [
+  { name: "Astro", letter: "A" },
+  { name: "React", letter: "R" },
+  { name: "Tailwind", letter: "T" },
+  { name: "Stripe", letter: "S" },
+  { name: "OpenAI", letter: "O" },
+  { name: "Supabase", letter: "Su" },
+  { name: "Drizzle", letter: "D" },
+  { name: "Resend", letter: "Re" },
+];
+---
+
+<section class="relative bg-gray-950 py-14">
+  <div class="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-gray-800 to-transparent"></div>
+  <div class="absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-gray-800 to-transparent"></div>
+
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <p class="text-center text-xs font-bold uppercase tracking-[0.2em] text-gray-600 mb-8">
+      Powered by the best tools
+    </p>
+    <div class="flex flex-wrap items-center justify-center gap-x-10 gap-y-6">
+      {technologies.map((tech) => (
+        <div class="flex items-center gap-2 text-gray-600 hover:text-gray-400 transition-colors">
+          <div class="w-8 h-8 rounded-md border border-gray-800 bg-gray-900/50 flex items-center justify-center text-xs font-bold text-gray-500">
+            {tech.letter}
+          </div>
+          <span class="text-sm font-medium">{tech.name}</span>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

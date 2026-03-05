@@ -1,0 +1,24 @@
+services:
+  app:
+    build: .
+    ports:
+      - "4321:4321"
+    env_file: .env
+    environment:
+      - DEPLOY_TARGET=node
+    depends_on:
+      - db
+
+  db:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: openboil
+      POSTGRES_PASSWORD: openboil
+      POSTGRES_DB: openboil
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+volumes:
+  pgdata:

@@ -1,0 +1,61 @@
+---
+import MarketingLayout from "@/layouts/MarketingLayout.astro";
+import BlogList from "@/components/blog/BlogList.astro";
+import { getCollection } from "astro:content";
+
+const allPosts = await getCollection("blog", ({ data }) => !data.draft);
+
+const sortedPosts = allPosts.sort(
+  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
+);
+
+const categories = [...new Set(sortedPosts.map((post) => post.data.category))];
+
+const selectedCategory = Astro.url.searchParams.get("category");
+
+const filteredPosts = selectedCategory
+  ? sortedPosts.filter((post) => post.data.category === selectedCategory)
+  : sortedPosts;
+---
+
+<MarketingLayout title="Blog" description="Guides, tutorials, and updates from the OpenBoil team.">
+  <section class="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
+    <div class="mb-12 text-center">
+      <h1 class="text-4xl font-bold tracking-tight text-foreground sm:text-5xl">
+        Blog
+      </h1>
+      <p class="mt-4 text-lg text-muted-foreground">
+        Guides, tutorials, and updates from the OpenBoil team.
+      </p>
+    </div>
+
+    <div class="mb-10 flex flex-wrap items-center justify-center gap-2">
+      <a
+        href="/blog"
+        class:list={[
+          "rounded-full px-4 py-1.5 text-sm font-medium transition-colors",
+          !selectedCategory
+            ? "bg-primary text-primary-foreground"
+            : "bg-muted text-muted-foreground hover:text-foreground",
+        ]}
+      >
+        All
+      </a>
+      {categories.map((category) => (
+        <a
+          href={`/blog?category=${category}`}
+          class:list={[
+            "rounded-full px-4 py-1.5 text-sm font-medium capitalize transition-colors",
+            selectedCategory === category
+              ? "bg-primary text-primary-foreground"
+              : "bg-muted text-muted-foreground hover:text-foreground",
+          ]}
+        >
+          {category}
+        </a>
+      ))}
+    </div>
+
+    <BlogList posts={filteredPosts} />
+  </section>
+</MarketingLayout>

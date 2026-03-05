@@ -1,0 +1,73 @@
+---
+import DashboardLayout from "@/layouts/DashboardLayout.astro";
+import ProfileForm from "@/components/dashboard/ProfileForm";
+import DeleteAccountSection from "@/components/dashboard/DeleteAccountSection";
+---
+
+<DashboardLayout title="Settings">
+  <div class="space-y-6">
+    <div>
+      <h1 class="text-3xl font-bold tracking-tight">Settings</h1>
+      <p class="text-muted-foreground">
+        Manage your account settings and preferences.
+      </p>
+    </div>
+
+    <!-- Profile Section -->
+    <ProfileForm client:load />
+
+    <!-- Password Change Section -->
+    <div class="rounded-xl border border-border bg-card text-card-foreground shadow">
+      <div class="flex flex-col space-y-1.5 p-6">
+        <h2 class="font-semibold leading-none tracking-tight">Change Password</h2>
+        <p class="text-sm text-muted-foreground">Update your password to keep your account secure.</p>
+      </div>
+      <div class="p-6 pt-0">
+        <form class="space-y-4 max-w-md" method="POST" action="/api/auth/change-password">
+          <div class="space-y-2">
+            <label for="current-password" class="text-sm font-medium leading-none">Current Password</label>
+            <input
+              type="password"
+              id="current-password"
+              name="currentPassword"
+              required
+              class="flex h-9 w-full rounded-md border border-border bg-transparent px-3 py-1 text-base shadow-sm transition-colors placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring md:text-sm"
+            />
+          </div>
+
+          <div class="space-y-2">
+            <label for="new-password" class="text-sm font-medium leading-none">New Password</label>
+            <input
+              type="password"
+              id="new-password"
+              name="newPassword"
+              required
+              class="flex h-9 w-full rounded-md border border-border bg-transparent px-3 py-1 text-base shadow-sm transition-colors placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring md:text-sm"
+            />
+          </div>
+
+          <div class="space-y-2">
+            <label for="confirm-password" class="text-sm font-medium leading-none">Confirm New Password</label>
+            <input
+              type="password"
+              id="confirm-password"
+              name="confirmPassword"
+              required
+              class="flex h-9 w-full rounded-md border border-border bg-transparent px-3 py-1 text-base shadow-sm transition-colors placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring md:text-sm"
+            />
+          </div>
+
+          <button
+            type="submit"
+            class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-colors bg-primary text-primary-foreground shadow hover:bg-primary/90 h-9 px-4 py-2"
+          >
+            Update Password
+          </button>
+        </form>
+      </div>
+    </div>
+
+    <!-- Delete Account Section -->
+    <DeleteAccountSection client:load />
+  </div>
+</DashboardLayout>

@@ -1,0 +1,22 @@
+---
+import DashboardLayout from "@/layouts/DashboardLayout.astro";
+import ContentGenerator from "@/components/ai/ContentGenerator";
+import { getActiveTool } from "@/lib/ai-tool";
+
+const tool = getActiveTool();
+if (tool.type !== "content") {
+  return Astro.redirect("/dashboard/ai");
+}
+---
+
+<DashboardLayout title="AI Content Generator">
+  <div class="space-y-6">
+    <div>
+      <h1 class="text-3xl font-bold tracking-tight">AI Content Generator</h1>
+      <p class="text-muted-foreground">
+        Generate high-quality content using AI. Select a template, enter your prompt, and let AI do the rest.
+      </p>
+    </div>
+    <ContentGenerator client:load />
+  </div>
+</DashboardLayout>

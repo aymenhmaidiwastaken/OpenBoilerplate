@@ -1,0 +1,298 @@
+---
+import MarketingLayout from "@/layouts/MarketingLayout.astro";
+import { config } from "@/config";
+import ContentDemo from "@/components/ai/ContentDemo";
+const appName = config.app.name;
+---
+
+<style is:global>
+  :root {
+    --color-primary: #8b5cf6;
+    --color-primary-foreground: #ffffff;
+    --color-ring: #8b5cf6;
+  }
+  .dark {
+    --color-primary: #a78bfa;
+    --color-primary-foreground: #0a0a0a;
+    --color-ring: #a78bfa;
+  }
+</style>
+
+<MarketingLayout title="AI Content Generator" description="Generate blog posts, marketing copy, and product descriptions with AI-powered content creation.">
+  <!-- Hero -->
+  <section class="relative py-20 sm:py-28 overflow-hidden">
+    <div class="absolute inset-0 bg-gradient-to-b from-violet-500/5 to-transparent"></div>
+    <div class="relative max-w-5xl mx-auto px-4 sm:px-6 text-center">
+      <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-violet-500/10 text-violet-600 dark:text-violet-400 text-sm font-medium mb-8">
+        <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" /></svg>
+        AI-Powered Content
+      </div>
+      <h1 class="text-4xl sm:text-6xl font-bold tracking-tight mb-6">
+        Create compelling content <br class="hidden sm:block" />
+        <span class="text-transparent bg-clip-text bg-gradient-to-r from-violet-500 to-purple-500">in seconds, not hours</span>
+      </h1>
+      <p class="text-lg sm:text-xl text-muted-foreground max-w-2xl mx-auto mb-10">
+        From blog posts to marketing copy, let AI handle the heavy lifting. Generate high-quality, on-brand content with just a prompt.
+      </p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <a href="/auth/register" class="inline-flex items-center justify-center h-12 px-8 rounded-lg bg-gradient-to-r from-violet-500 to-purple-500 text-white font-semibold hover:opacity-90 transition-opacity shadow-lg shadow-violet-500/25">
+          Start Creating Free
+        </a>
+        <a href="/pricing" class="inline-flex items-center justify-center h-12 px-8 rounded-lg border border-border bg-card font-semibold hover:bg-muted transition-colors">
+          View Pricing
+        </a>
+      </div>
+
+      <ContentDemo client:load />
+    </div>
+  </section>
+
+  <!-- Features -->
+  <section class="py-20 bg-muted/30">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6">
+      <div class="text-center mb-16">
+        <h2 class="text-3xl sm:text-4xl font-bold mb-4">Everything you need to create content at scale</h2>
+        <p class="text-lg text-muted-foreground max-w-2xl mx-auto">Powerful AI tools designed for content creators, marketers, and businesses.</p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div class="rounded-xl border border-border bg-card p-8">
+          <div class="w-12 h-12 rounded-xl bg-violet-500/10 flex items-center justify-center mb-5">
+            <svg class="w-6 h-6 text-violet-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z" /></svg>
+          </div>
+          <h3 class="text-lg font-semibold mb-2">Instant Generation</h3>
+          <p class="text-muted-foreground text-sm leading-relaxed">Generate blog posts, articles, and marketing copy in seconds with streaming AI output.</p>
+        </div>
+
+        <div class="rounded-xl border border-border bg-card p-8">
+          <div class="w-12 h-12 rounded-xl bg-purple-500/10 flex items-center justify-center mb-5">
+            <svg class="w-6 h-6 text-purple-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M9.594 3.94c.09-.542.56-.94 1.11-.94h2.593c.55 0 1.02.398 1.11.94l.213 1.281c.063.374.313.686.645.87.074.04.147.083.22.127.324.196.72.257 1.075.124l1.217-.456a1.125 1.125 0 011.37.49l1.296 2.247a1.125 1.125 0 01-.26 1.431l-1.003.827c-.293.24-.438.613-.431.992a6.759 6.759 0 010 .255c-.007.378.138.75.43.99l1.005.828c.424.35.534.954.26 1.43l-1.298 2.247a1.125 1.125 0 01-1.369.491l-1.217-.456c-.355-.133-.75-.072-1.076.124a6.57 6.57 0 01-.22.128c-.331.183-.581.495-.644.869l-.213 1.28c-.09.543-.56.941-1.11.941h-2.594c-.55 0-1.02-.398-1.11-.94l-.213-1.281c-.062-.374-.312-.686-.644-.87a6.52 6.52 0 01-.22-.127c-.325-.196-.72-.257-1.076-.124l-1.217.456a1.125 1.125 0 01-1.369-.49l-1.297-2.247a1.125 1.125 0 01.26-1.431l1.004-.827c.292-.24.437-.613.43-.992a6.932 6.932 0 010-.255c.007-.378-.138-.75-.43-.99l-1.004-.828a1.125 1.125 0 01-.26-1.43l1.297-2.247a1.125 1.125 0 011.37-.491l1.216.456c.356.133.751.072 1.076-.124.072-.044.146-.087.22-.128.332-.183.582-.495.644-.869l.214-1.281z" /><path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
+          </div>
+          <h3 class="text-lg font-semibold mb-2">Multiple Templates</h3>
+          <p class="text-muted-foreground text-sm leading-relaxed">Choose from blog posts, product descriptions, social media posts, email campaigns, and more.</p>
+        </div>
+
+        <div class="rounded-xl border border-border bg-card p-8">
+          <div class="w-12 h-12 rounded-xl bg-fuchsia-500/10 flex items-center justify-center mb-5">
+            <svg class="w-6 h-6 text-fuchsia-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M10.5 6h9.75M10.5 6a1.5 1.5 0 11-3 0m3 0a1.5 1.5 0 10-3 0M3.75 6H7.5m3 12h9.75m-9.75 0a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m-3.75 0H7.5m9-6h3.75m-3.75 0a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m-9.75 0h9.75" /></svg>
+          </div>
+          <h3 class="text-lg font-semibold mb-2">Tone & Style Control</h3>
+          <p class="text-muted-foreground text-sm leading-relaxed">Adjust tone, length, and creativity level to match your brand voice perfectly.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- How It Works -->
+  <section class="py-20">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6">
+      <div class="text-center mb-16">
+        <h2 class="text-3xl sm:text-4xl font-bold mb-4">How it works</h2>
+        <p class="text-lg text-muted-foreground max-w-2xl mx-auto">From idea to polished content in three simple steps.</p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div class="text-center">
+          <div class="w-14 h-14 rounded-full bg-violet-500/10 flex items-center justify-center mx-auto mb-5">
+            <span class="text-xl font-bold text-violet-500">1</span>
+          </div>
+          <h3 class="text-lg font-semibold mb-2">Describe your content</h3>
+          <p class="text-sm text-muted-foreground">Tell the AI what you need — a blog post topic, marketing angle, or product details.</p>
+        </div>
+
+        <div class="text-center">
+          <div class="w-14 h-14 rounded-full bg-purple-500/10 flex items-center justify-center mx-auto mb-5">
+            <span class="text-xl font-bold text-purple-500">2</span>
+          </div>
+          <h3 class="text-lg font-semibold mb-2">AI generates it</h3>
+          <p class="text-sm text-muted-foreground">Watch as AI crafts high-quality, on-brand content in seconds with streaming output.</p>
+        </div>
+
+        <div class="text-center">
+          <div class="w-14 h-14 rounded-full bg-fuchsia-500/10 flex items-center justify-center mx-auto mb-5">
+            <span class="text-xl font-bold text-fuchsia-500">3</span>
+          </div>
+          <h3 class="text-lg font-semibold mb-2">Edit and publish</h3>
+          <p class="text-sm text-muted-foreground">Review, refine, and publish your content directly or export it to your favorite tools.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Use Cases -->
+  <section class="py-20 bg-muted/30">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6">
+      <div class="text-center mb-16">
+        <h2 class="text-3xl sm:text-4xl font-bold mb-4">Built for every content need</h2>
+        <p class="text-lg text-muted-foreground max-w-2xl mx-auto">Whether you're a solo creator or a marketing team, our AI adapts to your workflow.</p>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 max-w-4xl mx-auto">
+        <div class="flex gap-4 p-6 rounded-xl border border-border bg-card">
+          <div class="w-10 h-10 rounded-lg bg-violet-500/10 flex-shrink-0 flex items-center justify-center">
+            <svg class="w-5 h-5 text-violet-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.331 0 4.512.89 6.138 2.363M12 6.042A8.967 8.967 0 0118 3.75c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18c-2.331 0-4.512.89-6.138 2.363" /></svg>
+          </div>
+          <div>
+            <h3 class="font-semibold mb-1">Blog Posts & Articles</h3>
+            <p class="text-sm text-muted-foreground">SEO-optimized long-form content that ranks and engages readers.</p>
+          </div>
+        </div>
+
+        <div class="flex gap-4 p-6 rounded-xl border border-border bg-card">
+          <div class="w-10 h-10 rounded-lg bg-purple-500/10 flex-shrink-0 flex items-center justify-center">
+            <svg class="w-5 h-5 text-purple-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 00-16.536-1.84M7.5 14.25L5.106 5.272M6 20.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm12.75 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z" /></svg>
+          </div>
+          <div>
+            <h3 class="font-semibold mb-1">Product Descriptions</h3>
+            <p class="text-sm text-muted-foreground">Compelling product copy that converts browsers into buyers.</p>
+          </div>
+        </div>
+
+        <div class="flex gap-4 p-6 rounded-xl border border-border bg-card">
+          <div class="w-10 h-10 rounded-lg bg-fuchsia-500/10 flex-shrink-0 flex items-center justify-center">
+            <svg class="w-5 h-5 text-fuchsia-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75" /></svg>
+          </div>
+          <div>
+            <h3 class="font-semibold mb-1">Email Campaigns</h3>
+            <p class="text-sm text-muted-foreground">Craft high-converting email sequences and newsletters.</p>
+          </div>
+        </div>
+
+        <div class="flex gap-4 p-6 rounded-xl border border-border bg-card">
+          <div class="w-10 h-10 rounded-lg bg-indigo-500/10 flex-shrink-0 flex items-center justify-center">
+            <svg class="w-5 h-5 text-indigo-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M7.5 8.25h9m-9 3H12m-9.75 1.51c0 1.6 1.123 2.994 2.707 3.227 1.129.166 2.27.293 3.423.379.35.026.67.21.865.501L12 21l2.755-4.133a1.14 1.14 0 01.865-.501 48.172 48.172 0 003.423-.379c1.584-.233 2.707-1.626 2.707-3.228V6.741c0-1.602-1.123-2.995-2.707-3.228A48.394 48.394 0 0012 3c-2.392 0-4.744.175-7.043.513C3.373 3.746 2.25 5.14 2.25 6.741v6.018z" /></svg>
+          </div>
+          <div>
+            <h3 class="font-semibold mb-1">Social Media Posts</h3>
+            <p class="text-sm text-muted-foreground">Engaging posts for Twitter, LinkedIn, Instagram, and more.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials -->
+  <section class="py-20">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6">
+      <div class="text-center mb-16">
+        <h2 class="text-3xl sm:text-4xl font-bold mb-4">Loved by content creators</h2>
+        <p class="text-lg text-muted-foreground max-w-2xl mx-auto">See what our users are saying about AI-powered content generation.</p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div class="rounded-xl border border-border bg-card p-8">
+          <div class="flex items-center gap-1 mb-4">
+            {[...Array(5)].map(() => <svg class="w-4 h-4 text-yellow-400 fill-yellow-400" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>)}
+          </div>
+          <p class="text-sm text-muted-foreground mb-6">"This tool cut our blog production time by 80%. We went from publishing twice a month to twice a week without hiring additional writers."</p>
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-full bg-gradient-to-br from-violet-400 to-purple-500 flex items-center justify-center text-white text-sm font-bold">SK</div>
+            <div>
+              <p class="text-sm font-semibold">Sarah K.</p>
+              <p class="text-xs text-muted-foreground">Content Marketing Manager</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="rounded-xl border border-border bg-card p-8">
+          <div class="flex items-center gap-1 mb-4">
+            {[...Array(5)].map(() => <svg class="w-4 h-4 text-yellow-400 fill-yellow-400" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>)}
+          </div>
+          <p class="text-sm text-muted-foreground mb-6">"The quality of the generated copy is remarkable. Our email open rates jumped 35% after switching to AI-generated subject lines and previews."</p>
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-full bg-gradient-to-br from-purple-400 to-fuchsia-500 flex items-center justify-center text-white text-sm font-bold">MR</div>
+            <div>
+              <p class="text-sm font-semibold">Marcus R.</p>
+              <p class="text-xs text-muted-foreground">Email Marketing Lead</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="rounded-xl border border-border bg-card p-8">
+          <div class="flex items-center gap-1 mb-4">
+            {[...Array(5)].map(() => <svg class="w-4 h-4 text-yellow-400 fill-yellow-400" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>)}
+          </div>
+          <p class="text-sm text-muted-foreground mb-6">"As a freelance writer, this is my secret weapon. I use it for first drafts and brainstorming — it's like having a writing partner available 24/7."</p>
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-full bg-gradient-to-br from-violet-400 to-indigo-500 flex items-center justify-center text-white text-sm font-bold">JL</div>
+            <div>
+              <p class="text-sm font-semibold">Jessica L.</p>
+              <p class="text-xs text-muted-foreground">Freelance Copywriter</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="py-20 bg-muted/30">
+    <div class="max-w-3xl mx-auto px-4 sm:px-6">
+      <div class="text-center mb-16">
+        <h2 class="text-3xl sm:text-4xl font-bold mb-4">Frequently asked questions</h2>
+        <p class="text-lg text-muted-foreground">Everything you need to know about AI content generation.</p>
+      </div>
+
+      <div class="space-y-4">
+        <details class="group rounded-xl border border-border bg-card">
+          <summary class="flex cursor-pointer items-center justify-between p-6 font-semibold [&::-webkit-details-marker]:hidden">
+            What types of content can the AI generate?
+            <svg class="w-5 h-5 text-muted-foreground transition-transform group-open:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" /></svg>
+          </summary>
+          <div class="px-6 pb-6 text-sm text-muted-foreground">Our AI can generate blog posts, articles, product descriptions, email campaigns, social media posts, ad copy, landing page content, press releases, and more. You can customize the format, length, and tone for any type of content.</div>
+        </details>
+
+        <details class="group rounded-xl border border-border bg-card">
+          <summary class="flex cursor-pointer items-center justify-between p-6 font-semibold [&::-webkit-details-marker]:hidden">
+            Is the generated content original?
+            <svg class="w-5 h-5 text-muted-foreground transition-transform group-open:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" /></svg>
+          </summary>
+          <div class="px-6 pb-6 text-sm text-muted-foreground">Yes, all generated content is original and unique. The AI creates fresh content based on your prompts rather than copying from existing sources. We recommend reviewing and editing the output to add your personal touch and ensure accuracy.</div>
+        </details>
+
+        <details class="group rounded-xl border border-border bg-card">
+          <summary class="flex cursor-pointer items-center justify-between p-6 font-semibold [&::-webkit-details-marker]:hidden">
+            Can I control the tone and style?
+            <svg class="w-5 h-5 text-muted-foreground transition-transform group-open:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" /></svg>
+          </summary>
+          <div class="px-6 pb-6 text-sm text-muted-foreground">Absolutely. You can specify the tone (professional, casual, humorous, etc.), target audience, writing style, and even provide brand guidelines. The AI adapts its output to match your preferences precisely.</div>
+        </details>
+
+        <details class="group rounded-xl border border-border bg-card">
+          <summary class="flex cursor-pointer items-center justify-between p-6 font-semibold [&::-webkit-details-marker]:hidden">
+            How many words can I generate per month?
+            <svg class="w-5 h-5 text-muted-foreground transition-transform group-open:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" /></svg>
+          </summary>
+          <div class="px-6 pb-6 text-sm text-muted-foreground">Our free plan includes 10,000 words per month. Paid plans offer higher limits starting at 50,000 words/month, with unlimited generation available on our Pro plan. Check our pricing page for full details.</div>
+        </details>
+
+        <details class="group rounded-xl border border-border bg-card">
+          <summary class="flex cursor-pointer items-center justify-between p-6 font-semibold [&::-webkit-details-marker]:hidden">
+            Does the AI support multiple languages?
+            <svg class="w-5 h-5 text-muted-foreground transition-transform group-open:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" /></svg>
+          </summary>
+          <div class="px-6 pb-6 text-sm text-muted-foreground">Yes, our AI supports content generation in over 30 languages including English, Spanish, French, German, Portuguese, Chinese, Japanese, and more. You can also translate existing content between languages.</div>
+        </details>
+
+        <details class="group rounded-xl border border-border bg-card">
+          <summary class="flex cursor-pointer items-center justify-between p-6 font-semibold [&::-webkit-details-marker]:hidden">
+            Can I use the generated content commercially?
+            <svg class="w-5 h-5 text-muted-foreground transition-transform group-open:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" /></svg>
+          </summary>
+          <div class="px-6 pb-6 text-sm text-muted-foreground">Yes, you own full rights to all content generated with our tool. You can use it for commercial purposes, publish it on your website, include it in marketing materials, or distribute it however you see fit.</div>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="py-20 bg-gradient-to-b from-violet-500/5 to-purple-500/5">
+    <div class="max-w-3xl mx-auto px-4 sm:px-6 text-center">
+      <h2 class="text-3xl sm:text-4xl font-bold mb-4">Ready to supercharge your content?</h2>
+      <p class="text-lg text-muted-foreground mb-8">Join thousands of creators using {appName} to produce content faster than ever.</p>
+      <a href="/auth/register" class="inline-flex items-center justify-center h-12 px-8 rounded-lg bg-gradient-to-r from-violet-500 to-purple-500 text-white font-semibold hover:opacity-90 transition-opacity shadow-lg shadow-violet-500/25">
+        Get Started Free &rarr;
+      </a>
+    </div>
+  </section>
+</MarketingLayout>

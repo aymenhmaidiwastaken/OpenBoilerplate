@@ -1,0 +1,103 @@
+---
+---
+
+<section class="relative overflow-hidden bg-gray-950 pt-28 pb-24 sm:pt-36 sm:pb-32 lg:pt-44 lg:pb-40">
+  <!-- Radial gradient ambient lights -->
+  <div class="absolute inset-0">
+    <div class="absolute inset-0 bg-[radial-gradient(ellipse_60%_50%_at_50%_-10%,rgba(6,182,212,0.12),transparent_70%)]"></div>
+    <div class="absolute inset-0 bg-[radial-gradient(ellipse_40%_60%_at_90%_60%,rgba(34,197,94,0.06),transparent_60%)]"></div>
+  </div>
+
+  <!-- Grid pattern overlay -->
+  <div class="absolute inset-0 bg-[repeating-linear-gradient(0deg,transparent,transparent_63px,rgba(255,255,255,0.025)_63px,rgba(255,255,255,0.025)_64px),repeating-linear-gradient(90deg,transparent,transparent_63px,rgba(255,255,255,0.025)_63px,rgba(255,255,255,0.025)_64px)]"></div>
+
+  <div class="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <div class="grid items-center gap-16 lg:grid-cols-2 lg:gap-20">
+      <!-- Left: Copy -->
+      <div>
+        <div class="mb-8 inline-flex items-center gap-2.5 rounded-full border border-cyan-500/20 bg-cyan-500/[0.07] px-4 py-1.5 text-sm font-medium text-cyan-400">
+          <span class="relative flex h-2 w-2">
+            <span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-cyan-400 opacity-60"></span>
+            <span class="relative inline-flex h-2 w-2 rounded-full bg-cyan-400"></span>
+          </span>
+          Now Open Source
+        </div>
+
+        <h1 class="text-4xl font-black uppercase leading-[0.95] tracking-tight text-white sm:text-5xl lg:text-6xl xl:text-7xl">
+          The future
+          <br />
+          of&nbsp;<span class="text-cyan-400" style="text-shadow: 0 0 20px rgba(6,182,212,0.5), 0 0 60px rgba(6,182,212,0.2);">SaaS</span>
+          <br />
+          starts here
+        </h1>
+
+        <p class="mt-7 max-w-lg text-base leading-relaxed text-gray-400 sm:text-lg">
+          The open-source boilerplate with provider swapping, AI integrations, and everything you need to ship fast.
+        </p>
+
+        <div class="mt-10 flex flex-col gap-3.5 sm:flex-row sm:items-center">
+          <a href="/auth/register" class="group relative inline-flex h-12 items-center justify-center overflow-hidden rounded-lg px-8 text-sm font-bold uppercase tracking-wide text-white transition-transform duration-200 hover:scale-[1.02] active:scale-[0.98]">
+            <span class="absolute inset-0 bg-gradient-to-r from-cyan-500 to-green-500"></span>
+            <span class="absolute inset-0 bg-gradient-to-r from-cyan-400 to-green-400 opacity-0 transition-opacity duration-300 group-hover:opacity-100"></span>
+            <span class="absolute -inset-1 rounded-lg bg-gradient-to-r from-cyan-500 to-green-500 opacity-25 blur-lg transition-opacity duration-300 group-hover:opacity-40"></span>
+            <span class="relative">Get Started Free</span>
+          </a>
+          <a href="/docs" class="inline-flex h-12 items-center justify-center rounded-lg border border-gray-700/80 px-8 text-sm font-semibold text-gray-300 transition-all duration-200 hover:border-gray-500 hover:bg-white/[0.03] hover:text-white">
+            View Docs
+            <svg class="ml-2 h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6" /></svg>
+          </a>
+        </div>
+
+        <!-- Social proof -->
+        <div class="mt-12 flex items-center gap-6">
+          <div class="flex -space-x-2">
+            {["S", "M", "E", "J", "A"].map((l) => (
+              <div class="w-8 h-8 rounded-full border-2 border-gray-950 bg-gradient-to-br from-cyan-500/40 to-green-500/40 flex items-center justify-center text-[10px] font-bold text-white">
+                {l}
+              </div>
+            ))}
+          </div>
+          <div class="text-sm">
+            <span class="text-white font-medium">2,000+</span>
+            <span class="text-gray-500 ml-1">developers shipping with OpenBoil</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right: Code block -->
+      <div class="relative">
+        <div class="absolute -inset-4 rounded-2xl bg-gradient-to-br from-cyan-500/10 via-transparent to-green-500/10 blur-2xl"></div>
+
+        <div class="relative rounded-xl border border-gray-800/80 bg-gray-900/80 shadow-2xl shadow-black/50 backdrop-blur-sm">
+          <div class="flex items-center gap-2 border-b border-gray-800/60 px-5 py-3.5">
+            <div class="h-3 w-3 rounded-full bg-gray-700"></div>
+            <div class="h-3 w-3 rounded-full bg-gray-700"></div>
+            <div class="h-3 w-3 rounded-full bg-gray-700"></div>
+            <span class="ml-3 text-xs font-medium text-gray-500">openboil.config.ts</span>
+          </div>
+          <div class="p-5 sm:p-6">
+            <pre class="overflow-x-auto text-[13px] leading-relaxed sm:text-sm"><code><span class="text-gray-500">// Configure your entire stack</span>
+<span class="text-pink-400">export default</span> &#123;
+  <span class="text-cyan-300">providers</span>: &#123;
+    <span class="text-cyan-300">auth</span>:     <span class="text-green-400">"supabase"</span>,
+    <span class="text-cyan-300">payment</span>:  <span class="text-green-400">"stripe"</span>,
+    <span class="text-cyan-300">database</span>: <span class="text-green-400">"drizzle"</span>,
+    <span class="text-cyan-300">ai</span>:       <span class="text-green-400">"openai"</span>,
+  &#125;,
+  <span class="text-cyan-300">features</span>: &#123;
+    <span class="text-cyan-300">blog</span>:    <span class="text-orange-400">true</span>,
+    <span class="text-cyan-300">admin</span>:   <span class="text-orange-400">true</span>,
+    <span class="text-cyan-300">credits</span>: <span class="text-orange-400">true</span>,
+  &#125;,
+&#125;</code></pre>
+          </div>
+        </div>
+
+        <div class="absolute -bottom-3 -right-3 rounded-lg border border-gray-800 bg-gray-900/90 px-3 py-2 text-xs shadow-lg backdrop-blur-sm">
+          <span class="text-green-400">&#10003;</span>
+          <span class="ml-1.5 text-gray-400">TypeScript</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

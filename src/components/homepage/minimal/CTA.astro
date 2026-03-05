@@ -1,0 +1,41 @@
+---
+import { config } from "@/config";
+---
+
+<section class="py-24 sm:py-32">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="rounded-2xl border border-border bg-card p-12 sm:p-16 text-center relative overflow-hidden">
+      <!-- Subtle background pattern -->
+      <div class="absolute inset-0 opacity-[0.02]" style="background-image: radial-gradient(circle at 1px 1px, currentColor 1px, transparent 0); background-size: 24px 24px;"></div>
+
+      <div class="relative">
+        <p class="text-xs font-medium uppercase tracking-widest text-muted-foreground mb-6">
+          Free & Open Source
+        </p>
+
+        <h2 class="text-3xl sm:text-4xl font-semibold tracking-tight max-w-lg mx-auto">
+          Ready to build your next SaaS?
+        </h2>
+
+        <p class="mt-4 text-lg text-muted-foreground max-w-md mx-auto">
+          Join thousands of developers shipping faster with {config.app.name}.
+        </p>
+
+        <div class="mt-10 flex flex-col sm:flex-row items-center justify-center gap-3">
+          <a href="/auth/register" class="inline-flex items-center justify-center h-11 px-8 text-sm font-medium rounded-lg bg-foreground text-background hover:opacity-90 transition-opacity">
+            Get Started Free
+          </a>
+          <a href="/docs" class="inline-flex items-center justify-center h-11 px-8 text-sm font-medium rounded-lg border border-border hover:bg-muted transition-colors">
+            Read the Docs
+          </a>
+        </div>
+
+        <!-- Terminal install -->
+        <div class="mt-10 inline-flex items-center gap-3 px-5 py-2.5 rounded-lg border border-border bg-muted/50">
+          <span class="text-xs text-muted-foreground font-mono">$</span>
+          <code class="text-sm font-mono">npx create-openboil my-app</code>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

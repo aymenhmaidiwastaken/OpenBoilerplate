@@ -1,0 +1,23 @@
+---
+import MarketingLayout from "@/layouts/MarketingLayout.astro";
+import { config } from "@/config";
+
+import ModernHomepage from "@/components/homepage/modern/index.astro";
+import MinimalHomepage from "@/components/homepage/minimal/index.astro";
+import BoldDarkHomepage from "@/components/homepage/bold-dark/index.astro";
+
+// Allow ?homepage= query param to override config
+const paramHomepage = Astro.url.searchParams.get("homepage");
+const validOptions = ["modern", "minimal", "bold-dark"] as const;
+const homepage = paramHomepage && validOptions.includes(paramHomepage as any)
+  ? paramHomepage
+  : config.homepage;
+---
+
+<MarketingLayout title={config.app.name} description={config.app.description}>
+  <div data-homepage={homepage}>
+    {homepage === "modern" && <ModernHomepage />}
+    {homepage === "minimal" && <MinimalHomepage />}
+    {homepage === "bold-dark" && <BoldDarkHomepage />}
+  </div>
+</MarketingLayout>

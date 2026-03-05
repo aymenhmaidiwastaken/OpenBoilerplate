@@ -1,0 +1,28 @@
+---
+export const prerender = false;
+
+const code = Astro.url.searchParams.get("code");
+
+if (!code) {
+  return Astro.redirect("/auth/login?error=missing_code");
+}
+
+try {
+  const callbackUrl = new URL("/api/auth/callback", Astro.url.origin);
+  callbackUrl.searchParams.set("code", code);
+
+  const res = await fetch(callbackUrl.toString(), {
+    redirect: "manual",
+  });
+
+  // Forward the session cookie from the API response
+  const setCookieHeader = res.headers.get("set-cookie");
+  if (setCookieHeader) {
+    Astro.response.headers.set("set-cookie", setCookieHeader);
+  }
+
+  return Astro.redirect("/dashboard");
+} catch {
+  return Astro.redirect("/auth/login?error=callback_failed");
+}
+---

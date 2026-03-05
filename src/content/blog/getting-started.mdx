@@ -1,0 +1,102 @@
+---
+title: "Getting Started with OpenBoil"
+description: "Learn how to set up and configure the OpenBoil SaaS boilerplate for your next project. From installation to your first deployment in minutes."
+pubDate: 2025-12-01
+author: "OpenBoil Team"
+category: "guides"
+draft: false
+---
+
+## Introduction
+
+OpenBoil is a production-ready SaaS boilerplate built with **Astro**, **React**, and **Tailwind CSS v4**. It provides everything you need to launch your SaaS product quickly, including authentication, payments, AI integrations, and more.
+
+## Prerequisites
+
+Before getting started, make sure you have the following installed:
+
+- **Node.js** 18 or later
+- **npm**, **pnpm**, or **yarn**
+- A code editor (we recommend VS Code)
+
+## Installation
+
+Clone the repository and install dependencies:
+
+```bash
+git clone https://github.com/your-org/openboil.git my-saas
+cd my-saas
+npm install
+```
+
+## Configuration
+
+OpenBoil uses a single configuration file at the root of your project. Open `openboil.config.ts` and customize it for your app:
+
+```typescript
+import type { OpenBoilConfig } from "./src/config/schema";
+
+const config: OpenBoilConfig = {
+  app: {
+    name: "My SaaS App",
+    description: "The best SaaS application ever built",
+    url: "https://mysaas.com",
+  },
+  auth: {
+    providers: ["github", "google"],
+  },
+  payments: {
+    provider: "stripe",
+  },
+};
+
+export default config;
+```
+
+## Environment Variables
+
+Copy the example environment file and fill in your secrets:
+
+```bash
+cp .env.example .env
+```
+
+The key environment variables you need to configure are:
+
+- `DATABASE_URL` - Your database connection string
+- `AUTH_SECRET` - A random secret for session encryption
+- `STRIPE_SECRET_KEY` - Your Stripe secret key (if using payments)
+
+## Running the Development Server
+
+Start the dev server with:
+
+```bash
+npm run dev
+```
+
+Your app will be available at `http://localhost:4321`.
+
+## Project Structure
+
+Here is an overview of the key directories:
+
+```
+src/
+  components/   # Reusable UI components
+  config/       # App configuration and schema
+  layouts/      # Page layouts (Marketing, Auth, Base)
+  lib/          # Utility functions and helpers
+  pages/        # File-based routing
+  providers/    # Provider abstractions (auth, payments, AI)
+  stores/       # Client-side state management
+  styles/       # Global styles and Tailwind config
+```
+
+## Next Steps
+
+Now that you have OpenBoil running, explore these topics:
+
+- **[Understanding the Provider System](/blog/provider-system)** - Learn how the provider abstraction works
+- **[Building AI-Powered Features](/blog/ai-features)** - Add AI capabilities to your app
+- **[Deploying Your Application](/blog/deployment-guide)** - Ship your SaaS to production

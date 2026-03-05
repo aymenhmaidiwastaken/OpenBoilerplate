@@ -1,0 +1,52 @@
+---
+import AdminLayout from "@/layouts/AdminLayout.astro";
+import { StatCard } from "@/components/admin/StatCard";
+import { AnalyticsCharts } from "@/components/admin/AnalyticsCharts";
+
+const isDemo = Astro.cookies.get("openboil-demo")?.value === "true";
+---
+
+<AdminLayout title="Admin Overview">
+  <div class="space-y-8">
+    <div>
+      <h2 class="text-2xl font-bold tracking-tight">Dashboard Overview</h2>
+      <p class="text-muted-foreground">Key metrics and recent activity.</p>
+    </div>
+
+    <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+      <StatCard
+        client:load
+        title="Total Users"
+        value={isDemo ? "2,847" : "---"}
+        change="+12%"
+        icon="users"
+      />
+      <StatCard
+        client:load
+        title="Monthly Revenue"
+        value={isDemo ? "$12,400" : "---"}
+        change="+8%"
+        icon="revenue"
+      />
+      <StatCard
+        client:load
+        title="Active Subscriptions"
+        value={isDemo ? "342" : "---"}
+        change="+5%"
+        icon="subscriptions"
+      />
+      <StatCard
+        client:load
+        title="AI Usage"
+        value={isDemo ? "18,439" : "---"}
+        change="+23%"
+        icon="activity"
+      />
+    </div>
+
+    <div>
+      <h3 class="mb-4 text-lg font-semibold">Recent Trends</h3>
+      <AnalyticsCharts client:load />
+    </div>
+  </div>
+</AdminLayout>

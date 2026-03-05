@@ -1,0 +1,43 @@
+---
+import BaseHead from "@/components/layout/BaseHead.astro";
+import HomepageSwitcher from "@/components/layout/HomepageSwitcher.astro";
+import type { SEOProps } from "@/lib/seo";
+
+interface Props extends SEOProps {}
+
+const user = Astro.locals.user;
+const isDemo = Astro.cookies.get("openboil-demo")?.value === "true";
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <BaseHead {...Astro.props} />
+  </head>
+  <body>
+    <slot />
+    <HomepageSwitcher />
+
+    <script is:inline define:vars={{ user: user ? { id: user.id, email: user.email, name: user.name, avatar: user.avatar, role: user.role } : null }}>
+      // Prevent flash of wrong theme
+      (function () {
+        const saved = localStorage.getItem("theme");
+        const theme = saved || "system";
+        const root = document.documentElement;
+        root.classList.remove("light", "dark");
+        if (theme === "system") {
+          const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+          root.classList.add(prefersDark ? "dark" : "light");
+        } else {
+          root.classList.add(theme);
+        }
+
+        // Expose initial user state for client-side hydration
+        if (user) {
+          window.__INITIAL_STATE__ = window.__INITIAL_STATE__ || {};
+          window.__INITIAL_STATE__.user = user;
+        }
+      })();
+    </script>
+  </body>
+</html>

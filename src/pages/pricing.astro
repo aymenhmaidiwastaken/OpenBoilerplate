@@ -1,0 +1,79 @@
+---
+import MarketingLayout from "@/layouts/MarketingLayout.astro";
+import Container from "@/components/layout/Container.astro";
+import Section from "@/components/layout/Section.astro";
+import { PricingTable } from "@/components/pricing/PricingTable";
+---
+
+<MarketingLayout title="Pricing" description="Simple, transparent pricing for everyone.">
+  <div>
+    <!-- Hero -->
+    <Section>
+      <Container>
+        <div class="text-center max-w-2xl mx-auto mb-8">
+          <h1 class="text-4xl font-bold tracking-tight sm:text-5xl">
+            Simple, transparent pricing
+          </h1>
+          <p class="mt-4 text-lg text-muted-foreground">
+            Choose the plan that fits your needs. Upgrade or downgrade at any time.
+          </p>
+        </div>
+
+        <PricingTable client:load />
+      </Container>
+    </Section>
+
+    <!-- FAQ Section -->
+    <Section compact class="border-t border-border bg-muted/30">
+      <Container>
+        <div class="max-w-3xl mx-auto">
+          <h2 class="text-2xl font-bold text-center mb-10">Frequently Asked Questions</h2>
+
+          <div class="space-y-6">
+            <div>
+              <h3 class="font-semibold text-lg">Can I change my plan later?</h3>
+              <p class="mt-1 text-muted-foreground">
+                Yes, you can upgrade or downgrade your plan at any time. Changes take effect immediately, and we will prorate the difference.
+              </p>
+            </div>
+
+            <div>
+              <h3 class="font-semibold text-lg">What happens when I run out of credits?</h3>
+              <p class="mt-1 text-muted-foreground">
+                When your credits are exhausted, AI-powered features will be paused until your credits renew at the start of your next billing cycle, or you can upgrade to a higher plan.
+              </p>
+            </div>
+
+            <div>
+              <h3 class="font-semibold text-lg">Is there a free trial?</h3>
+              <p class="mt-1 text-muted-foreground">
+                Our Free plan gives you 100 credits per month at no cost. You can use it as long as you like before deciding to upgrade.
+              </p>
+            </div>
+
+            <div>
+              <h3 class="font-semibold text-lg">How do I cancel my subscription?</h3>
+              <p class="mt-1 text-muted-foreground">
+                You can cancel your subscription at any time from your account settings. Your plan will remain active until the end of the current billing period.
+              </p>
+            </div>
+
+            <div>
+              <h3 class="font-semibold text-lg">Do you offer refunds?</h3>
+              <p class="mt-1 text-muted-foreground">
+                We offer a 14-day money-back guarantee. If you are not satisfied with your plan, contact support within 14 days of purchase for a full refund.
+              </p>
+            </div>
+
+            <div>
+              <h3 class="font-semibold text-lg">What payment methods do you accept?</h3>
+              <p class="mt-1 text-muted-foreground">
+                We accept all major credit cards, debit cards, and selected local payment methods through our payment processor.
+              </p>
+            </div>
+          </div>
+        </div>
+      </Container>
+    </Section>
+  </div>
+</MarketingLayout>

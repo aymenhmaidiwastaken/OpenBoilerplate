@@ -1,0 +1,89 @@
+---
+---
+
+<section class="relative pt-24 pb-20 sm:pt-32 sm:pb-28 overflow-hidden">
+  <div class="absolute top-0 right-0 w-[500px] h-[500px] bg-primary/[0.03] rounded-full blur-3xl -translate-y-1/2 translate-x-1/4"></div>
+
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="grid lg:grid-cols-2 gap-16 lg:gap-20 items-center">
+      <!-- Left: Copy -->
+      <div>
+        <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-border bg-muted/50 text-xs font-medium text-muted-foreground mb-8">
+          <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
+          v1.0 — Now Available
+        </div>
+
+        <h1 class="text-4xl sm:text-5xl lg:text-6xl font-semibold tracking-tight leading-[1.1] text-foreground">
+          Build your SaaS
+          <span class="block text-muted-foreground/60">the right way.</span>
+        </h1>
+
+        <p class="mt-6 text-lg text-muted-foreground leading-relaxed max-w-lg">
+          A thoughtfully crafted boilerplate with authentication, payments, AI, and admin — all swappable through a single config file.
+        </p>
+
+        <div class="mt-10 flex flex-col sm:flex-row items-start gap-3">
+          <a href="/auth/register" class="inline-flex items-center justify-center h-11 px-7 text-sm font-medium rounded-lg bg-foreground text-background hover:opacity-90 transition-opacity">
+            Start Building
+            <svg class="ml-2 w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
+          </a>
+          <a href="/docs" class="inline-flex items-center justify-center h-11 px-7 text-sm font-medium rounded-lg border border-border hover:bg-muted transition-colors">
+            Documentation
+          </a>
+        </div>
+
+        <div class="mt-12 flex items-center gap-8 text-sm">
+          <div>
+            <div class="font-semibold text-foreground">180+</div>
+            <div class="text-muted-foreground">Components</div>
+          </div>
+          <div class="w-px h-8 bg-border"></div>
+          <div>
+            <div class="font-semibold text-foreground">5 Providers</div>
+            <div class="text-muted-foreground">Swappable</div>
+          </div>
+          <div class="w-px h-8 bg-border"></div>
+          <div>
+            <div class="font-semibold text-foreground">MIT</div>
+            <div class="text-muted-foreground">Licensed</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right: Config preview card -->
+      <div class="relative">
+        <div class="absolute -inset-4 bg-gradient-to-br from-primary/5 via-transparent to-primary/5 rounded-2xl blur-xl"></div>
+        <div class="relative rounded-xl border border-border bg-card shadow-xl overflow-hidden">
+          <div class="flex items-center gap-2 px-4 py-3 border-b border-border bg-muted/30">
+            <div class="flex gap-1.5">
+              <div class="w-2.5 h-2.5 rounded-full bg-muted-foreground/20"></div>
+              <div class="w-2.5 h-2.5 rounded-full bg-muted-foreground/20"></div>
+              <div class="w-2.5 h-2.5 rounded-full bg-muted-foreground/20"></div>
+            </div>
+            <span class="ml-2 text-xs text-muted-foreground font-mono">openboil.config.ts</span>
+          </div>
+          <pre class="p-5 text-sm font-mono leading-relaxed overflow-x-auto"><code><span class="text-muted-foreground">// One file. Full control.</span>
+<span class="text-primary">export default</span> &#123;
+  <span class="text-emerald-600 dark:text-emerald-400">providers</span>: &#123;
+    <span class="text-muted-foreground">auth</span>:     <span class="text-amber-600 dark:text-amber-400">"supabase"</span>,
+    <span class="text-muted-foreground">payment</span>:  <span class="text-amber-600 dark:text-amber-400">"stripe"</span>,
+    <span class="text-muted-foreground">database</span>: <span class="text-amber-600 dark:text-amber-400">"drizzle"</span>,
+    <span class="text-muted-foreground">ai</span>:       <span class="text-amber-600 dark:text-amber-400">"openai"</span>,
+  &#125;,
+  <span class="text-emerald-600 dark:text-emerald-400">features</span>: &#123;
+    <span class="text-muted-foreground">blog</span>:    <span class="text-primary">true</span>,
+    <span class="text-muted-foreground">admin</span>:   <span class="text-primary">true</span>,
+    <span class="text-muted-foreground">credits</span>: <span class="text-primary">true</span>,
+  &#125;
+&#125;</code></pre>
+        </div>
+        <div class="absolute -top-3 -right-3 px-3 py-1.5 rounded-lg border border-border bg-card shadow-md text-xs font-medium">
+          <span class="text-emerald-500">&#10003;</span> TypeScript
+        </div>
+        <div class="absolute -bottom-3 -left-3 px-3 py-1.5 rounded-lg border border-border bg-card shadow-md text-xs font-medium">
+          <span class="text-emerald-500">&#10003;</span> Astro + React
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

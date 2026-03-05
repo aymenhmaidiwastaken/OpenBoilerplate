@@ -1,0 +1,112 @@
+---
+const screens = [
+  {
+    title: "Dashboard",
+    description: "User dashboard with usage stats, quick actions, and recent activity.",
+    mockup: "dashboard",
+  },
+  {
+    title: "Admin Panel",
+    description: "Full admin with user management, analytics, revenue charts, and settings.",
+    mockup: "admin",
+  },
+  {
+    title: "AI Tools",
+    description: "Content generation, image creation, and document analysis built in.",
+    mockup: "ai",
+  },
+];
+---
+
+<section class="py-24 sm:py-32">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center max-w-2xl mx-auto mb-16">
+      <p class="text-sm font-medium text-primary mb-3">What's included</p>
+      <h2 class="text-3xl sm:text-4xl font-semibold tracking-tight">
+        Production-ready screens
+      </h2>
+      <p class="mt-4 text-lg text-muted-foreground">
+        Every page you need is already built and functional.
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+      {screens.map((screen) => (
+        <div class="group rounded-xl border border-border bg-card overflow-hidden hover:shadow-lg hover:border-primary/20 transition-all">
+          <!-- Screen mockup -->
+          <div class="aspect-[4/3] bg-muted/50 border-b border-border relative overflow-hidden">
+            <!-- Fake UI mockup -->
+            <div class="absolute inset-3 rounded-lg border border-border/50 bg-background overflow-hidden">
+              {/* Top bar */}
+              <div class="h-6 border-b border-border/50 bg-muted/30 flex items-center px-2 gap-1">
+                <div class="w-1.5 h-1.5 rounded-full bg-muted-foreground/20"></div>
+                <div class="w-1.5 h-1.5 rounded-full bg-muted-foreground/20"></div>
+                <div class="w-1.5 h-1.5 rounded-full bg-muted-foreground/20"></div>
+                <div class="ml-2 w-16 h-2 rounded bg-muted-foreground/10"></div>
+              </div>
+              <div class="flex h-[calc(100%-1.5rem)]">
+                {/* Sidebar */}
+                <div class="w-1/4 border-r border-border/50 bg-muted/20 p-2 space-y-1.5">
+                  <div class="w-full h-2 rounded bg-primary/20"></div>
+                  <div class="w-3/4 h-2 rounded bg-muted-foreground/10"></div>
+                  <div class="w-full h-2 rounded bg-muted-foreground/10"></div>
+                  <div class="w-2/3 h-2 rounded bg-muted-foreground/10"></div>
+                </div>
+                {/* Content */}
+                <div class="flex-1 p-3 space-y-2">
+                  {screen.mockup === "dashboard" && (
+                    <>
+                      <div class="grid grid-cols-3 gap-1.5">
+                        <div class="h-8 rounded bg-primary/10 border border-primary/20"></div>
+                        <div class="h-8 rounded bg-emerald-500/10 border border-emerald-500/20"></div>
+                        <div class="h-8 rounded bg-amber-500/10 border border-amber-500/20"></div>
+                      </div>
+                      <div class="h-16 rounded bg-muted/50 border border-border/30"></div>
+                      <div class="h-6 rounded bg-muted/30"></div>
+                    </>
+                  )}
+                  {screen.mockup === "admin" && (
+                    <>
+                      <div class="grid grid-cols-4 gap-1">
+                        <div class="h-6 rounded bg-primary/10"></div>
+                        <div class="h-6 rounded bg-rose-500/10"></div>
+                        <div class="h-6 rounded bg-emerald-500/10"></div>
+                        <div class="h-6 rounded bg-amber-500/10"></div>
+                      </div>
+                      <div class="h-20 rounded bg-muted/50 border border-border/30"></div>
+                    </>
+                  )}
+                  {screen.mockup === "ai" && (
+                    <>
+                      <div class="h-4 rounded bg-muted/50 w-2/3"></div>
+                      <div class="h-14 rounded bg-gradient-to-r from-primary/10 to-violet-500/10 border border-primary/20"></div>
+                      <div class="h-3 rounded bg-muted/30 w-full"></div>
+                      <div class="h-3 rounded bg-muted/30 w-4/5"></div>
+                    </>
+                  )}
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="p-5">
+            <h3 class="text-base font-semibold mb-1">{screen.title}</h3>
+            <p class="text-sm text-muted-foreground">{screen.description}</p>
+          </div>
+        </div>
+      ))}
+    </div>
+
+    <!-- Additional pages list -->
+    <div class="mt-12 text-center">
+      <p class="text-sm text-muted-foreground mb-4">Also includes:</p>
+      <div class="flex flex-wrap justify-center gap-2">
+        {["Login & Register", "Pricing Page", "Blog System", "Settings", "Billing Portal", "404 Page", "Contact", "About"].map((page) => (
+          <span class="px-3 py-1 rounded-full border border-border bg-muted/30 text-xs font-medium text-muted-foreground">
+            {page}
+          </span>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>

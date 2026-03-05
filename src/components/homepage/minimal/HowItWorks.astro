@@ -1,0 +1,69 @@
+---
+const steps = [
+  {
+    step: "01",
+    title: "Clone & Configure",
+    description: "Clone the repo, run the setup wizard, and configure your providers in a single config file.",
+    code: `npx create-openboil my-app\ncd my-app && npm run setup`,
+  },
+  {
+    step: "02",
+    title: "Choose Your Stack",
+    description: "Pick your auth, payments, database, and AI provider. Each one is swappable at any time.",
+    code: `providers: {\n  auth: "supabase",\n  payment: "stripe",\n  ai: "openai"\n}`,
+  },
+  {
+    step: "03",
+    title: "Ship It",
+    description: "Deploy to Vercel, Netlify, or Docker with a single command. Your SaaS is live.",
+    code: `npm run build\n# Deploy to your platform`,
+  },
+];
+---
+
+<section class="py-24 sm:py-32 bg-muted/30">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center max-w-2xl mx-auto mb-20">
+      <p class="text-sm font-medium text-primary mb-3">How it works</p>
+      <h2 class="text-3xl sm:text-4xl font-semibold tracking-tight">
+        Three steps to launch
+      </h2>
+      <p class="mt-4 text-lg text-muted-foreground">
+        Go from zero to production in minutes, not months.
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-12 lg:gap-8">
+      {steps.map((item, i) => (
+        <div class="relative">
+          {/* Connector line for desktop */}
+          {i < steps.length - 1 && (
+            <div class="hidden lg:block absolute top-8 left-[calc(100%+1rem)] w-[calc(100%-2rem)] h-px border-t border-dashed border-border"></div>
+          )}
+
+          <div class="flex items-center gap-4 mb-5">
+            <div class="w-12 h-12 rounded-full bg-foreground text-background flex items-center justify-center text-sm font-bold flex-shrink-0">
+              {item.step}
+            </div>
+            <h3 class="text-lg font-semibold">{item.title}</h3>
+          </div>
+
+          <p class="text-sm text-muted-foreground leading-relaxed mb-5 pl-16 lg:pl-0">
+            {item.description}
+          </p>
+
+          <div class="rounded-lg border border-border bg-card overflow-hidden">
+            <div class="px-4 py-2 border-b border-border bg-muted/30">
+              <div class="flex gap-1.5">
+                <div class="w-2 h-2 rounded-full bg-muted-foreground/20"></div>
+                <div class="w-2 h-2 rounded-full bg-muted-foreground/20"></div>
+                <div class="w-2 h-2 rounded-full bg-muted-foreground/20"></div>
+              </div>
+            </div>
+            <pre class="p-4 text-xs font-mono text-muted-foreground leading-relaxed overflow-x-auto"><code>{item.code}</code></pre>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

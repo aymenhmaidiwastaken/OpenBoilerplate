@@ -1,0 +1,49 @@
+---
+import MarketingLayout from "@/layouts/MarketingLayout.astro";
+import BlogList from "@/components/blog/BlogList.astro";
+import { getCollection } from "astro:content";
+
+export async function getStaticPaths() {
+  const posts = await getCollection("blog", ({ data }) => !data.draft);
+  const categories = [...new Set(posts.map((post) => post.data.category))];
+
+  return categories.map((category) => ({
+    params: { category },
+    props: {
+      posts: posts
+        .filter((post) => post.data.category === category)
+        .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()),
+    },
+  }));
+}
+
+const { category } = Astro.params;
+const { posts } = Astro.props;
+---
+
+<MarketingLayout
+  title={`${category.charAt(0).toUpperCase() + category.slice(1)} - Blog`}
+  description={`Browse all ${category} posts on the OpenBoil blog.`}
+>
+  <section class="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
+    <div class="mb-12">
+      <a
+        href="/blog"
+        class="mb-4 inline-flex items-center gap-1 text-sm text-muted-foreground transition-colors hover:text-foreground"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18" />
+        </svg>
+        All posts
+      </a>
+      <h1 class="text-4xl font-bold tracking-tight text-foreground capitalize sm:text-5xl">
+        {category}
+      </h1>
+      <p class="mt-4 text-lg text-muted-foreground">
+        {posts.length} {posts.length === 1 ? "post" : "posts"} in this category.
+      </p>
+    </div>
+
+    <BlogList posts={posts} />
+  </section>
+</MarketingLayout>

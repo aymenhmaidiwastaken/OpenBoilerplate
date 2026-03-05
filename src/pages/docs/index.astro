@@ -1,0 +1,69 @@
+---
+import MarketingLayout from "@/layouts/MarketingLayout.astro";
+
+const categories = [
+  {
+    title: "Getting Started",
+    description: "Learn how to set up OpenBoil and create your first project in minutes.",
+    href: "/docs/getting-started",
+    icon: "rocket",
+  },
+  {
+    title: "Configuration",
+    description: "Customize your OpenBoil instance with providers, themes, and environment variables.",
+    href: "/docs/configuration",
+    icon: "settings",
+  },
+  {
+    title: "Providers",
+    description: "Connect authentication, database, payment, and email providers.",
+    href: "/docs/providers",
+    icon: "plug",
+  },
+  {
+    title: "Deployment",
+    description: "Deploy your application to Vercel, Netlify, Docker, or any Node.js host.",
+    href: "/docs/deployment",
+    icon: "cloud",
+  },
+  {
+    title: "API Reference",
+    description: "Full reference for all API routes, hooks, utilities, and component props.",
+    href: "/docs/api-reference",
+    icon: "code",
+  },
+  {
+    title: "FAQ",
+    description: "Answers to the most commonly asked questions about OpenBoil.",
+    href: "/docs/faq",
+    icon: "help",
+  },
+];
+---
+
+<MarketingLayout title="Documentation" description="OpenBoil documentation and guides.">
+  <section class="py-20 px-4">
+    <div class="max-w-5xl mx-auto">
+      <div class="text-center mb-16">
+        <h1 class="text-4xl md:text-5xl font-bold tracking-tight mb-4">Documentation</h1>
+        <p class="text-lg text-muted-foreground max-w-2xl mx-auto">
+          Everything you need to build, configure, and deploy your SaaS application with OpenBoil.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {categories.map((category) => (
+          <a
+            href={category.href}
+            class="group rounded-xl border border-border bg-card p-6 shadow-sm transition-colors hover:border-primary/50 hover:shadow-md"
+          >
+            <h2 class="text-lg font-semibold mb-2 group-hover:text-primary transition-colors">
+              {category.title}
+            </h2>
+            <p class="text-sm text-muted-foreground">{category.description}</p>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+</MarketingLayout>

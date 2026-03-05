@@ -1,0 +1,133 @@
+---
+title: "Understanding the Provider System"
+description: "Deep dive into OpenBoil's provider abstraction layer. Learn how to swap authentication, payment, and AI providers without changing your application code."
+pubDate: 2025-12-15
+author: "OpenBoil Team"
+category: "architecture"
+draft: false
+---
+
+## What Are Providers?
+
+The provider system is the architectural backbone of OpenBoil. It lets you swap between different third-party services -- such as authentication backends, payment processors, and AI models -- without modifying your application logic.
+
+Each provider implements a common interface, so your app code stays the same regardless of which service is running behind the scenes.
+
+## Architecture Overview
+
+The provider system follows a simple pattern:
+
+```
+openboil.config.ts  ->  Provider Factory  ->  Concrete Provider
+```
+
+When your app starts, OpenBoil reads the configuration, determines which providers to use, and instantiates the correct implementations automatically.
+
+## Auth Providers
+
+OpenBoil ships with multiple authentication providers out of the box:
+
+```typescript
+// src/providers/auth/interface.ts
+export interface AuthProvider {
+  signIn(credentials: SignInInput): Promise<AuthResult>;
+  signUp(credentials: SignUpInput): Promise<AuthResult>;
+  signOut(sessionId: string): Promise<void>;
+  getSession(token: string): Promise<Session | null>;
+  getOAuthUrl(provider: string): Promise<string>;
+  handleOAuthCallback(code: string): Promise<AuthResult>;
+}
+```
+
+Switching from one auth provider to another is a single config change:
+
+```typescript
+// openboil.config.ts
+{
+  auth: {
+    provider: "lucia",   // or "better-auth", "custom"
+    providers: ["github", "google", "email"],
+  }
+}
+```
+
+## Payment Providers
+
+The payment provider interface abstracts subscription management, checkout sessions, and webhook handling:
+
+```typescript
+// src/providers/payments/interface.ts
+export interface PaymentProvider {
+  createCheckoutSession(params: CheckoutParams): Promise<CheckoutSession>;
+  createPortalSession(customerId: string): Promise<PortalSession>;
+  getSubscription(subscriptionId: string): Promise<Subscription>;
+  handleWebhook(payload: string, signature: string): Promise<WebhookResult>;
+}
+```
+
+Both Stripe and Lemon Squeezy are supported:
+
+```typescript
+{
+  payments: {
+    provider: "stripe",  // or "lemonsqueezy"
+  }
+}
+```
+
+## AI Providers
+
+The AI provider layer normalizes chat completions and text generation across different LLM APIs:
+
+```typescript
+// src/providers/ai/interface.ts
+export interface AIProvider {
+  chat(messages: Message[], options?: ChatOptions): Promise<ChatResponse>;
+  stream(messages: Message[], options?: ChatOptions): AsyncIterable<ChatChunk>;
+  generateText(prompt: string, options?: GenerateOptions): Promise<string>;
+}
+```
+
+## Creating a Custom Provider
+
+You can add your own providers by implementing the corresponding interface:
+
+```typescript
+// src/providers/auth/my-custom-auth.ts
+import type { AuthProvider } from "./interface";
+
+export class MyCustomAuth implements AuthProvider {
+  async signIn(credentials: SignInInput): Promise<AuthResult> {
+    // Your custom sign-in logic
+  }
+
+  async signUp(credentials: SignUpInput): Promise<AuthResult> {
+    // Your custom sign-up logic
+  }
+
+  // ... implement remaining methods
+}
+```
+
+Then register it in the provider factory:
+
+```typescript
+// src/providers/auth/index.ts
+import { MyCustomAuth } from "./my-custom-auth";
+
+export function createAuthProvider(config: AuthConfig): AuthProvider {
+  switch (config.provider) {
+    case "my-custom":
+      return new MyCustomAuth(config);
+    // ...
+  }
+}
+```
+
+## Why This Pattern Matters
+
+The provider pattern gives you three key advantages:
+
+1. **Vendor flexibility** - Switch providers without rewriting application code
+2. **Testability** - Easily mock providers in tests
+3. **Gradual migration** - Swap providers in staging before production

@@ -1,0 +1,80 @@
+---
+import { config } from "@/config";
+import { ThemeToggle } from "./ThemeToggle";
+import { MobileNav } from "./MobileNav";
+
+const user = Astro.locals.user;
+const pathname = Astro.url.pathname;
+
+const navLinks = [
+  { href: "/", label: "Home" },
+  { href: "/pricing", label: "Pricing" },
+  { href: "/blog", label: "Blog" },
+  { href: "/about", label: "About" },
+];
+---
+
+<header class="sticky top-0 z-30 w-full border-b border-border/50 bg-background/80 backdrop-blur-lg">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex h-16 items-center justify-between">
+      <!-- Logo -->
+      <a href="/" class="flex items-center gap-2.5 hover:opacity-80 transition-opacity">
+        <div class="w-8 h-8 rounded-lg bg-primary flex items-center justify-center">
+          <span class="text-sm font-bold text-primary-foreground">{config.app.name.charAt(0)}</span>
+        </div>
+        <span class="text-lg font-semibold tracking-tight">{config.app.name}</span>
+      </a>
+
+      <!-- Desktop Nav -->
+      <nav class="hidden md:flex items-center gap-1">
+        {navLinks.map((link) => (
+          <a
+            href={link.href}
+            class:list={[
+              "px-3 py-1.5 rounded-md text-sm font-medium transition-colors",
+              pathname === link.href
+                ? "text-foreground bg-muted"
+                : "text-muted-foreground hover:text-foreground hover:bg-muted/50",
+            ]}
+          >
+            {link.label}
+          </a>
+        ))}
+      </nav>
+
+      <!-- Right Side -->
+      <div class="flex items-center gap-2">
+        <ThemeToggle client:only="react" />
+
+        {user ? (
+          <div class="hidden md:flex items-center gap-3">
+            <a href="/dashboard" class="inline-flex items-center justify-center h-9 px-4 text-sm font-medium rounded-md bg-primary text-primary-foreground hover:bg-primary/90 transition-colors">
+              Dashboard
+            </a>
+          </div>
+        ) : (
+          <div class="hidden md:flex items-center gap-2">
+            <a href="/auth/login" class="inline-flex items-center justify-center h-9 px-4 text-sm font-medium rounded-md text-muted-foreground hover:text-foreground hover:bg-muted transition-colors">
+              Log in
+            </a>
+            <a href="/auth/register" class="inline-flex items-center justify-center h-9 px-4 text-sm font-medium rounded-md bg-primary text-primary-foreground hover:bg-primary/90 transition-colors">
+              Get Started
+            </a>
+          </div>
+        )}
+
+        <button
+          class="md:hidden inline-flex items-center justify-center h-9 w-9 rounded-md hover:bg-muted transition-colors"
+          aria-label="Open menu"
+          id="mobile-menu-toggle"
+        >
+          <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+          </svg>
+        </button>
+      </div>
+    </div>
+  </div>
+</header>
+
+<MobileNav client:only="react" />

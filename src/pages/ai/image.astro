@@ -1,0 +1,22 @@
+---
+import DashboardLayout from "@/layouts/DashboardLayout.astro";
+import ImageGenerator from "@/components/ai/ImageGenerator";
+import { getActiveTool } from "@/lib/ai-tool";
+
+const tool = getActiveTool();
+if (tool.type !== "image") {
+  return Astro.redirect("/dashboard/ai");
+}
+---
+
+<DashboardLayout title="AI Image Generator">
+  <div class="space-y-6">
+    <div>
+      <h1 class="text-3xl font-bold tracking-tight">AI Image Generator</h1>
+      <p class="text-muted-foreground">
+        Create images from text descriptions. Describe what you want and choose a size.
+      </p>
+    </div>
+    <ImageGenerator client:load />
+  </div>
+</DashboardLayout>

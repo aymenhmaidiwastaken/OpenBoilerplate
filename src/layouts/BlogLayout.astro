@@ -1,0 +1,18 @@
+---
+import BaseLayout from "./BaseLayout.astro";
+import Header from "@/components/layout/Header.astro";
+import Footer from "@/components/layout/Footer.astro";
+import type { SEOProps } from "@/lib/seo";
+
+interface Props extends SEOProps {}
+---
+
+<BaseLayout {...Astro.props}>
+  <Header />
+  <main class="min-h-[calc(100vh-4rem)]">
+    <article class="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
+      <slot />
+    </article>
+  </main>
+  <Footer />
+</BaseLayout>

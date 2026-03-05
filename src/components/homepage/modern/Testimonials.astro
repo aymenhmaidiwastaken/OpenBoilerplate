@@ -1,0 +1,53 @@
+---
+const testimonials = [
+  {
+    quote: "OpenBoil saved us weeks of development time. The provider system is genius — we started with Stripe and Supabase, then switched to LemonSqueezy without touching a single component.",
+    name: "Sarah Chen",
+    role: "CTO at LaunchFast",
+    initials: "SC",
+  },
+  {
+    quote: "The best boilerplate I've used. Clean architecture, proper TypeScript, and the AI features were a huge bonus. Launched our MVP in 3 days.",
+    name: "Marcus Rodriguez",
+    role: "Indie Hacker",
+    initials: "MR",
+  },
+  {
+    quote: "We evaluated 10+ boilerplates before settling on OpenBoil. The admin dashboard alone is worth it — analytics, user management, everything pre-built.",
+    name: "Emily Park",
+    role: "Founder at DataPulse",
+    initials: "EP",
+  },
+];
+---
+
+<section class="py-24 sm:py-32">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center max-w-2xl mx-auto mb-16">
+      <p class="text-sm font-semibold text-primary uppercase tracking-wider mb-3">Testimonials</p>
+      <h2 class="text-3xl sm:text-4xl font-bold tracking-tight">
+        Loved by developers
+      </h2>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+      {testimonials.map((t) => (
+        <div class="relative rounded-xl border border-border bg-card p-6">
+          <svg class="absolute top-6 right-6 w-8 h-8 text-primary/10" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z" />
+          </svg>
+          <p class="text-sm leading-relaxed text-muted-foreground mb-6 pr-8">{t.quote}</p>
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-full bg-gradient-to-br from-primary to-violet-500 flex items-center justify-center text-xs font-bold text-white">
+              {t.initials}
+            </div>
+            <div>
+              <div class="text-sm font-semibold">{t.name}</div>
+              <div class="text-xs text-muted-foreground">{t.role}</div>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

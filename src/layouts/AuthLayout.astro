@@ -1,0 +1,25 @@
+---
+import BaseLayout from "./BaseLayout.astro";
+import Logo from "@/components/layout/Logo.astro";
+import type { SEOProps } from "@/lib/seo";
+
+interface Props extends SEOProps {}
+---
+
+<BaseLayout {...Astro.props}>
+  <div class="min-h-screen flex flex-col items-center justify-center px-4 py-12 bg-muted/30">
+    <div class="mb-8">
+      <Logo size="lg" />
+    </div>
+
+    <div class="w-full max-w-md rounded-xl border border-border bg-card text-card-foreground shadow-sm p-6 sm:p-8">
+      <slot />
+    </div>
+
+    <p class="mt-6 text-sm text-muted-foreground">
+      <a href="/" class="hover:text-foreground transition-colors">
+        &larr; Back to home
+      </a>
+    </p>
+  </div>
+</BaseLayout>

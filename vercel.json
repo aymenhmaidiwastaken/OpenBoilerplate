@@ -1,0 +1,5 @@
+{
+  "buildCommand": "DEPLOY_TARGET=vercel npm run build",
+  "outputDirectory": "dist",
+  "framework": "astro"
+}

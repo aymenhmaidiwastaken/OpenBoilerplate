@@ -1,0 +1,1342 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>OpenBoil Documentation</title>
+<style>
+  :root {
+    --bg: #ffffff;
+    --bg-secondary: #f8f9fb;
+    --bg-code: #f1f3f5;
+    --text: #1a1a2e;
+    --text-secondary: #555770;
+    --text-muted: #8b8da3;
+    --border: #e2e4ea;
+    --accent: #6366f1;
+    --accent-light: #eef2ff;
+    --green: #10b981;
+    --green-light: #ecfdf5;
+    --amber: #f59e0b;
+    --amber-light: #fffbeb;
+    --red: #ef4444;
+    --red-light: #fef2f2;
+    --blue: #3b82f6;
+    --blue-light: #eff6ff;
+    --cyan: #06b6d4;
+    --cyan-light: #ecfeff;
+    --font: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+    --font-mono: 'JetBrains Mono', 'Fira Code', 'Cascadia Code', 'Consolas', monospace;
+    --radius: 8px;
+    --shadow: 0 1px 3px rgba(0,0,0,.06), 0 1px 2px rgba(0,0,0,.04);
+    --shadow-md: 0 4px 12px rgba(0,0,0,.08);
+    --sidebar-w: 280px;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #0f1117;
+      --bg-secondary: #161822;
+      --bg-code: #1c1e2d;
+      --text: #e4e5eb;
+      --text-secondary: #a0a2b3;
+      --text-muted: #6c6e82;
+      --border: #2a2d3e;
+      --accent: #818cf8;
+      --accent-light: #1e1b4b;
+      --green-light: #052e16;
+      --amber-light: #451a03;
+      --red-light: #450a0a;
+      --blue-light: #1e3a5f;
+      --cyan-light: #083344;
+      --shadow: 0 1px 3px rgba(0,0,0,.3);
+      --shadow-md: 0 4px 12px rgba(0,0,0,.4);
+    }
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; scroll-padding-top: 80px; }
+
+  body {
+    font-family: var(--font);
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.7;
+    font-size: 15px;
+  }
+
+  /* ── SIDEBAR ── */
+  .sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: var(--sidebar-w);
+    height: 100vh;
+    background: var(--bg-secondary);
+    border-right: 1px solid var(--border);
+    overflow-y: auto;
+    z-index: 100;
+    padding: 24px 0;
+  }
+
+  .sidebar-logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 0 20px 20px;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 16px;
+    text-decoration: none;
+    color: var(--text);
+  }
+
+  .sidebar-logo .logo-icon {
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    background: var(--accent);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: 700;
+    font-size: 14px;
+  }
+
+  .sidebar-logo span {
+    font-size: 18px;
+    font-weight: 700;
+    letter-spacing: -0.3px;
+  }
+
+  .sidebar-section {
+    padding: 0 12px;
+    margin-bottom: 8px;
+  }
+
+  .sidebar-section-title {
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    color: var(--text-muted);
+    padding: 8px 8px 4px;
+  }
+
+  .sidebar a {
+    display: block;
+    padding: 6px 12px;
+    border-radius: 6px;
+    color: var(--text-secondary);
+    text-decoration: none;
+    font-size: 13.5px;
+    font-weight: 450;
+    transition: all .15s;
+  }
+
+  .sidebar a:hover {
+    background: var(--border);
+    color: var(--text);
+  }
+
+  /* ── MAIN ── */
+  .main {
+    margin-left: var(--sidebar-w);
+    max-width: 820px;
+    padding: 48px 48px 120px;
+  }
+
+  /* ── TYPOGRAPHY ── */
+  h1 {
+    font-size: 36px;
+    font-weight: 800;
+    letter-spacing: -0.8px;
+    line-height: 1.2;
+    margin-bottom: 12px;
+  }
+
+  h1 + p { color: var(--text-secondary); font-size: 17px; margin-bottom: 40px; }
+
+  h2 {
+    font-size: 24px;
+    font-weight: 700;
+    letter-spacing: -0.4px;
+    margin: 56px 0 16px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  h3 {
+    font-size: 18px;
+    font-weight: 650;
+    margin: 36px 0 10px;
+  }
+
+  h4 {
+    font-size: 15px;
+    font-weight: 650;
+    margin: 24px 0 8px;
+    color: var(--text-secondary);
+  }
+
+  p { margin-bottom: 16px; }
+
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+
+  strong { font-weight: 650; }
+
+  ul, ol { margin: 0 0 16px 20px; }
+  li { margin-bottom: 6px; }
+  li code { font-size: 13px; }
+
+  hr {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 40px 0;
+  }
+
+  /* ── CODE ── */
+  code {
+    font-family: var(--font-mono);
+    font-size: 13px;
+    background: var(--bg-code);
+    padding: 2px 6px;
+    border-radius: 4px;
+    color: var(--accent);
+  }
+
+  pre {
+    background: var(--bg-code);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 18px 20px;
+    overflow-x: auto;
+    margin: 0 0 20px;
+    line-height: 1.6;
+  }
+
+  pre code {
+    background: none;
+    padding: 0;
+    color: var(--text);
+    font-size: 13px;
+  }
+
+  /* ── CALLOUTS ── */
+  .callout {
+    border-radius: var(--radius);
+    padding: 16px 18px;
+    margin: 20px 0;
+    font-size: 14px;
+    line-height: 1.6;
+    display: flex;
+    gap: 12px;
+  }
+
+  .callout-icon { flex-shrink: 0; font-size: 18px; margin-top: 1px; }
+
+  .callout-info { background: var(--blue-light); border-left: 3px solid var(--blue); }
+  .callout-success { background: var(--green-light); border-left: 3px solid var(--green); }
+  .callout-warning { background: var(--amber-light); border-left: 3px solid var(--amber); }
+  .callout-danger { background: var(--red-light); border-left: 3px solid var(--red); }
+
+  /* ── TABLE ── */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 16px 0 24px;
+    font-size: 14px;
+  }
+
+  th, td {
+    text-align: left;
+    padding: 10px 14px;
+    border: 1px solid var(--border);
+  }
+
+  th {
+    background: var(--bg-secondary);
+    font-weight: 600;
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+    color: var(--text-secondary);
+  }
+
+  /* ── BADGES ── */
+  .badge {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.2px;
+  }
+  .badge-green { background: var(--green-light); color: var(--green); }
+  .badge-blue { background: var(--blue-light); color: var(--blue); }
+  .badge-amber { background: var(--amber-light); color: var(--amber); }
+  .badge-cyan { background: var(--cyan-light); color: var(--cyan); }
+
+  /* ── GRID ── */
+  .card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 16px;
+    margin: 20px 0;
+  }
+
+  .card {
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 18px;
+    background: var(--bg);
+    transition: box-shadow .2s;
+  }
+  .card:hover { box-shadow: var(--shadow-md); }
+  .card h4 { margin: 0 0 6px; font-size: 15px; color: var(--text); }
+  .card p { margin: 0; font-size: 13px; color: var(--text-secondary); }
+
+  /* ── FILE TREE ── */
+  .file-tree {
+    font-family: var(--font-mono);
+    font-size: 13px;
+    line-height: 1.8;
+    background: var(--bg-code);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 18px 20px;
+    margin: 16px 0 24px;
+    overflow-x: auto;
+  }
+
+  .file-tree .dir { color: var(--accent); font-weight: 600; }
+  .file-tree .comment { color: var(--text-muted); }
+
+  /* ── STEP COUNTER ── */
+  .steps { counter-reset: step; margin: 20px 0; }
+  .step {
+    counter-increment: step;
+    padding: 16px 16px 16px 56px;
+    position: relative;
+    border-left: 2px solid var(--border);
+    margin-left: 16px;
+    margin-bottom: 4px;
+  }
+  .step::before {
+    content: counter(step);
+    position: absolute;
+    left: -14px;
+    top: 16px;
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    background: var(--accent);
+    color: white;
+    font-weight: 700;
+    font-size: 13px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .step h4 { margin: 0 0 6px; color: var(--text); font-size: 15px; }
+  .step p { margin: 0; font-size: 14px; color: var(--text-secondary); }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 900px) {
+    .sidebar { display: none; }
+    .main { margin-left: 0; padding: 32px 20px 80px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- SIDEBAR -->
+<nav class="sidebar">
+  <a href="#" class="sidebar-logo">
+    <div class="logo-icon">O</div>
+    <span>OpenBoil Docs</span>
+  </a>
+
+  <div class="sidebar-section">
+    <div class="sidebar-section-title">Getting Started</div>
+    <a href="#introduction">Introduction</a>
+    <a href="#prerequisites">Prerequisites</a>
+    <a href="#installation">Installation</a>
+    <a href="#quick-setup">Quick Setup Wizard</a>
+    <a href="#manual-setup">Manual Setup</a>
+  </div>
+
+  <div class="sidebar-section">
+    <div class="sidebar-section-title">Configuration</div>
+    <a href="#config-file">Config File</a>
+    <a href="#env-variables">Environment Variables</a>
+    <a href="#homepage-design">Homepage Design</a>
+    <a href="#pricing-plans">Pricing Plans</a>
+    <a href="#theming">Theming</a>
+  </div>
+
+  <div class="sidebar-section">
+    <div class="sidebar-section-title">Providers</div>
+    <a href="#provider-system">Provider System</a>
+    <a href="#auth-providers">Authentication</a>
+    <a href="#payment-providers">Payments</a>
+    <a href="#database-providers">Database</a>
+    <a href="#ai-providers">AI</a>
+    <a href="#email-providers">Email</a>
+  </div>
+
+  <div class="sidebar-section">
+    <div class="sidebar-section-title">Features</div>
+    <a href="#authentication">Auth Pages &amp; API</a>
+    <a href="#dashboard">User Dashboard</a>
+    <a href="#admin">Admin Dashboard</a>
+    <a href="#ai-features">AI Features</a>
+    <a href="#blog-system">Blog System</a>
+    <a href="#credit-system">Credit System</a>
+    <a href="#email-templates">Email Templates</a>
+  </div>
+
+  <div class="sidebar-section">
+    <div class="sidebar-section-title">Architecture</div>
+    <a href="#project-structure">Project Structure</a>
+    <a href="#middleware">Middleware</a>
+    <a href="#state-management">State Management</a>
+    <a href="#api-routes">API Routes</a>
+  </div>
+
+  <div class="sidebar-section">
+    <div class="sidebar-section-title">Deployment</div>
+    <a href="#deploy-vercel">Vercel</a>
+    <a href="#deploy-netlify">Netlify</a>
+    <a href="#deploy-docker">Docker</a>
+  </div>
+
+  <div class="sidebar-section">
+    <div class="sidebar-section-title">Reference</div>
+    <a href="#scripts">Scripts</a>
+    <a href="#all-pages">All Pages &amp; Routes</a>
+    <a href="#tech-stack">Tech Stack</a>
+  </div>
+</nav>
+
+<!-- MAIN CONTENT -->
+<div class="main">
+
+<!-- ═══════════════════════════════════════════ -->
+<h1 id="introduction">OpenBoil Documentation</h1>
+<p>Complete guide to setting up, configuring, and deploying the OpenBoil SaaS boilerplate. Everything you need to launch your SaaS product in record time.</p>
+
+<div class="card-grid">
+  <div class="card">
+    <h4>Modular Providers</h4>
+    <p>Swap auth, payments, DB, and AI providers with one config change.</p>
+  </div>
+  <div class="card">
+    <h4>3 Homepage Designs</h4>
+    <p>Modern SaaS, Minimal, or Bold Dark &mdash; pick one in config.</p>
+  </div>
+  <div class="card">
+    <h4>Full Auth System</h4>
+    <p>Login, register, OAuth, sessions, roles &mdash; all pre-built.</p>
+  </div>
+  <div class="card">
+    <h4>AI-Powered Tools</h4>
+    <p>Content generation, image creation, document analysis included.</p>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════ -->
+<h2 id="prerequisites">Prerequisites</h2>
+<p>Before you begin, make sure you have the following installed:</p>
+<table>
+  <tr><th>Tool</th><th>Version</th><th>Purpose</th></tr>
+  <tr><td><strong>Node.js</strong></td><td>18.x or higher</td><td>JavaScript runtime</td></tr>
+  <tr><td><strong>npm</strong></td><td>9.x or higher</td><td>Package manager (comes with Node)</td></tr>
+  <tr><td><strong>PostgreSQL</strong></td><td>14+ (optional)</td><td>Required only if using Drizzle DB provider</td></tr>
+  <tr><td><strong>Git</strong></td><td>Any</td><td>Version control</td></tr>
+</table>
+
+<div class="callout callout-info">
+  <div class="callout-icon">&#x1f4a1;</div>
+  <div>If you don't have PostgreSQL locally, you can use <strong>Neon</strong> (free tier) for a cloud-hosted PostgreSQL database. Or use Docker Compose which includes PostgreSQL automatically.</div>
+</div>
+
+<!-- ═══════════════════════════════════════════ -->
+<h2 id="installation">Installation</h2>
+
+<div class="steps">
+  <div class="step">
+    <h4>Clone the repository</h4>
+    <pre><code>git clone https://github.com/yourorg/openboil.git
+cd openboil</code></pre>
+  </div>
+
+  <div class="step">
+    <h4>Install dependencies</h4>
+    <pre><code>npm install</code></pre>
+    <p>This installs Astro, React, Tailwind CSS, shadcn/ui, Drizzle ORM, and all other dependencies.</p>
+  </div>
+
+  <div class="step">
+    <h4>Run the setup wizard OR configure manually</h4>
+    <pre><code>npm run setup</code></pre>
+    <p>The interactive wizard will ask you to choose providers and generate your config + <code>.env</code> file. Alternatively, see <a href="#manual-setup">Manual Setup</a> below.</p>
+  </div>
+
+  <div class="step">
+    <h4>Set up the database (if using Drizzle)</h4>
+    <pre><code>npm run db:push</code></pre>
+    <p>This pushes the schema to your PostgreSQL database. Make sure <code>DATABASE_URL</code> is set in <code>.env</code> first.</p>
+  </div>
+
+  <div class="step">
+    <h4>Seed sample data (optional)</h4>
+    <pre><code>npm run seed</code></pre>
+    <p>Creates an admin user (<code>admin@openboil.com</code> / <code>password123</code>), sample users, and sample usage data.</p>
+  </div>
+
+  <div class="step">
+    <h4>Start the dev server</h4>
+    <pre><code>npm run dev</code></pre>
+    <p>Open <code>http://localhost:4321</code> in your browser. You're ready to build!</p>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════ -->
+<h2 id="quick-setup">Quick Setup Wizard</h2>
+<p>The setup wizard (<code>npm run setup</code>) is an interactive CLI that walks you through configuration:</p>
+<pre><code>$ npm run setup
+
+ OpenBoil Setup
+
+ ? Which auth provider?       &gt; Custom (JWT + Google OAuth)
+ ? Which payment provider?    &gt; Stripe
+ ? Which database provider?   &gt; Drizzle + PostgreSQL
+ ? Which AI provider?         &gt; OpenAI
+ ? Which homepage design?     &gt; Modern SaaS
+ ? App name?                  &gt; My SaaS App
+ ? App URL?                   &gt; http://localhost:4321
+
+ &#x2713; Config generated
+ &#x2713; .env generated
+
+ Setup complete! Run `npm run dev` to start developing.</code></pre>
+
+<p>The wizard generates two files:</p>
+<ul>
+  <li><code>openboil.config.ts</code> &mdash; your provider and feature configuration</li>
+  <li><code>.env</code> &mdash; a copy of <code>.env.example</code> for you to fill in your API keys</li>
+</ul>
+
+<!-- ═══════════════════════════════════════════ -->
+<h2 id="manual-setup">Manual Setup</h2>
+
+<h3>Step 1: Create your .env file</h3>
+<pre><code>cp .env.example .env</code></pre>
+<p>Then open <code>.env</code> and fill in the variables for the providers you've chosen. You only need to fill in the section for your selected provider. For example, if using <strong>Custom auth + Stripe + Drizzle + OpenAI + Resend</strong>:</p>
+<pre><code># Required for Custom auth
+JWT_SECRET=generate-a-random-64-char-string-here
+
+# Required for Google OAuth (optional)
+GOOGLE_CLIENT_ID=your-google-client-id
+GOOGLE_CLIENT_SECRET=your-google-client-secret
+
+# Required for Drizzle + PostgreSQL
+DATABASE_URL=postgresql://user:password@localhost:5432/openboil
+
+# Required for Stripe
+STRIPE_SECRET_KEY=sk_test_...
+STRIPE_WEBHOOK_SECRET=whsec_...
+PUBLIC_STRIPE_PUBLISHABLE_KEY=pk_test_...
+
+# Required for OpenAI
+OPENAI_API_KEY=sk-...
+
+# Required for Resend
+RESEND_API_KEY=re_...
+EMAIL_FROM=noreply@yourdomain.com</code></pre>
+
+<h3>Step 2: Edit openboil.config.ts</h3>
+<p>This is the central configuration file. Set your app name, choose providers, define pricing plans, and pick a homepage design:</p>
+<pre><code>import type { OpenBoilConfig } from "./src/config/schema";
+
+const config: OpenBoilConfig = {
+  app: {
+    name: "My SaaS",
+    description: "Your SaaS description here",
+    url: "http://localhost:4321",     // Change to your domain in production
+  },
+
+  homepage: "modern",                 // "modern" | "minimal" | "bold-dark"
+
+  providers: {
+    auth: "custom",                   // "firebase" | "supabase" | "custom"
+    payment: "stripe",                // "stripe" | "lemonsqueezy"
+    database: "drizzle",              // "firestore" | "supabase" | "drizzle"
+    ai: "openai",                     // "openai" | "anthropic" | "google"
+    email: "resend",                  // "resend"
+  },
+
+  features: {
+    blog: true,
+    ai: true,
+    admin: true,
+    credits: true,
+  },
+
+  pricing: {
+    currency: "USD",
+    plans: [
+      {
+        id: "free",
+        name: "Free",
+        price: { monthly: 0, yearly: 0 },
+        credits: 100,
+        features: ["100 AI credits/month", "Basic support"],
+      },
+      {
+        id: "pro",
+        name: "Pro",
+        price: { monthly: 19, yearly: 190 },
+        credits: 5000,
+        features: ["5,000 AI credits/month", "Priority support"],
+        popular: true,    // Highlighted on the pricing page
+      },
+    ],
+  },
+
+  theme: {
+    defaultMode: "system",
+    primaryColor: "#6366f1",
+  },
+};
+
+export default config;</code></pre>
+
+<!-- ═══════════════════════════════════════════ -->
+<h2 id="config-file">Config File Reference</h2>
+<p>The <code>openboil.config.ts</code> file is validated at startup using Zod. If your config is invalid, you'll see a clear error message telling you exactly what's wrong.</p>
+
+<table>
+  <tr><th>Field</th><th>Type</th><th>Description</th></tr>
+  <tr><td><code>app.name</code></td><td>string</td><td>Your app name (shown in header, emails, SEO)</td></tr>
+  <tr><td><code>app.description</code></td><td>string</td><td>SEO meta description</td></tr>
+  <tr><td><code>app.url</code></td><td>URL string</td><td>Production URL (used in OAuth redirects, emails, OG tags)</td></tr>
+  <tr><td><code>app.logo</code></td><td>string (optional)</td><td>Path to your logo image in <code>/public</code></td></tr>
+  <tr><td><code>homepage</code></td><td><code>"modern"</code> | <code>"minimal"</code> | <code>"bold-dark"</code></td><td>Which homepage design to render</td></tr>
+  <tr><td><code>providers.auth</code></td><td><code>"custom"</code> | <code>"firebase"</code> | <code>"supabase"</code></td><td>Authentication provider</td></tr>
+  <tr><td><code>providers.payment</code></td><td><code>"stripe"</code> | <code>"lemonsqueezy"</code></td><td>Payment/subscription provider</td></tr>
+  <tr><td><code>providers.database</code></td><td><code>"drizzle"</code> | <code>"firestore"</code> | <code>"supabase"</code></td><td>Database provider</td></tr>
+  <tr><td><code>providers.ai</code></td><td><code>"openai"</code> | <code>"anthropic"</code> | <code>"google"</code></td><td>AI text/image generation provider</td></tr>
+  <tr><td><code>providers.email</code></td><td><code>"resend"</code></td><td>Transactional email provider</td></tr>
+  <tr><td><code>features.*</code></td><td>boolean</td><td>Toggle features on/off (blog, ai, admin, credits)</td></tr>
+  <tr><td><code>pricing.plans[]</code></td><td>Plan array</td><td>Define your subscription tiers</td></tr>
+  <tr><td><code>theme.defaultMode</code></td><td><code>"light"</code> | <code>"dark"</code> | <code>"system"</code></td><td>Default theme mode</td></tr>
+  <tr><td><code>theme.primaryColor</code></td><td>CSS color</td><td>Primary brand color</td></tr>
+</table>
+
+<!-- ═══════════════════════════════════════════ -->
+<h2 id="env-variables">Environment Variables</h2>
+<p>You only need to fill in the env vars for the providers you've selected. Here's what each provider needs:</p>
+
+<h3>Custom Auth (JWT)</h3>
+<table>
+  <tr><th>Variable</th><th>Required</th><th>Description</th></tr>
+  <tr><td><code>JWT_SECRET</code></td><td>Yes</td><td>Secret key for signing JWTs. Use a random 64+ character string</td></tr>
+  <tr><td><code>GOOGLE_CLIENT_ID</code></td><td>For OAuth</td><td>Google OAuth client ID from Google Cloud Console</td></tr>
+  <tr><td><code>GOOGLE_CLIENT_SECRET</code></td><td>For OAuth</td><td>Google OAuth client secret</td></tr>
+</table>
+
+<h3>Firebase Auth</h3>
+<table>
+  <tr><th>Variable</th><th>Description</th></tr>
+  <tr><td><code>FIREBASE_PROJECT_ID</code></td><td>Firebase project ID</td></tr>
+  <tr><td><code>FIREBASE_CLIENT_EMAIL</code></td><td>Service account email</td></tr>
+  <tr><td><code>FIREBASE_PRIVATE_KEY</code></td><td>Service account private key (with \n for newlines)</td></tr>
+</table>
+<div class="callout callout-warning">
+  <div class="callout-icon">&#x26a0;</div>
+  <div>Firebase Auth requires <code>npm install firebase-admin</code> as an additional dependency. It is not included by default.</div>
+</div>
+
+<h3>Supabase Auth</h3>
+<table>
+  <tr><th>Variable</th><th>Description</th></tr>
+  <tr><td><code>PUBLIC_SUPABASE_URL</code></td><td>Your Supabase project URL</td></tr>
+  <tr><td><code>PUBLIC_SUPABASE_ANON_KEY</code></td><td>Supabase anon/public key</td></tr>
+  <tr><td><code>SUPABASE_SERVICE_ROLE_KEY</code></td><td>Supabase service role key (server-side only)</td></tr>
+</table>
+
+<h3>Database (Drizzle + PostgreSQL)</h3>
+<table>
+  <tr><th>Variable</th><th>Description</th></tr>
+  <tr><td><code>DATABASE_URL</code></td><td>PostgreSQL connection string, e.g. <code>postgresql://user:pass@host:5432/dbname</code></td></tr>
+</table>
+
+<h3>Stripe</h3>
+<table>
+  <tr><th>Variable</th><th>Description</th></tr>
+  <tr><td><code>STRIPE_SECRET_KEY</code></td><td>Stripe secret key (starts with <code>sk_</code>)</td></tr>
+  <tr><td><code>STRIPE_WEBHOOK_SECRET</code></td><td>Webhook signing secret (starts with <code>whsec_</code>)</td></tr>
+  <tr><td><code>PUBLIC_STRIPE_PUBLISHABLE_KEY</code></td><td>Stripe publishable key (starts with <code>pk_</code>)</td></tr>
+</table>
+
+<h3>LemonSqueezy</h3>
+<table>
+  <tr><th>Variable</th><th>Description</th></tr>
+  <tr><td><code>LEMONSQUEEZY_API_KEY</code></td><td>LemonSqueezy API key</td></tr>
+  <tr><td><code>LEMONSQUEEZY_WEBHOOK_SECRET</code></td><td>Webhook signing secret</td></tr>
+  <tr><td><code>LEMONSQUEEZY_STORE_ID</code></td><td>Your store ID</td></tr>
+</table>
+
+<h3>AI Providers</h3>
+<table>
+  <tr><th>Provider</th><th>Variable</th><th>Model Used</th></tr>
+  <tr><td>OpenAI</td><td><code>OPENAI_API_KEY</code></td><td>GPT-4o (text), DALL-E 3 (images)</td></tr>
+  <tr><td>Anthropic</td><td><code>ANTHROPIC_API_KEY</code></td><td>Claude Sonnet (text only, no image gen)</td></tr>
+  <tr><td>Google</td><td><code>GOOGLE_AI_API_KEY</code></td><td>Gemini Pro (text only, no image gen)</td></tr>
+</table>
+
+<h3>Email (Resend)</h3>
+<table>
+  <tr><th>Variable</th><th>Description</th></tr>
+  <tr><td><code>RESEND_API_KEY</code></td><td>Resend API key (starts with <code>re_</code>)</td></tr>
+  <tr><td><code>EMAIL_FROM</code></td><td>Sender email address (must be verified in Resend)</td></tr>
+</table>
+
+<!-- ═══════════════════════════════════════════ -->
+<h2 id="homepage-design">Homepage Design</h2>
+<p>OpenBoil ships with 3 homepage designs. Switch between them by changing the <code>homepage</code> field in <code>openboil.config.ts</code>:</p>
+
+<div class="card-grid">
+  <div class="card">
+    <h4><span class="badge badge-blue">modern</span> Modern SaaS</h4>
+    <p>Gradient hero, feature cards with colored icons, social proof, code preview, stats bar, gradient CTA.</p>
+  </div>
+  <div class="card">
+    <h4><span class="badge badge-green">minimal</span> Minimal</h4>
+    <p>Ultra-clean editorial layout, generous whitespace, numbered features, single testimonial, subtle CTA.</p>
+  </div>
+  <div class="card">
+    <h4><span class="badge badge-cyan">bold-dark</span> Bold Dark</h4>
+    <p>Dark background, grid pattern, cyan/green neon accents, bento grid features, glow effects, terminal CTA.</p>
+  </div>
+</div>
+
+<pre><code>// openboil.config.ts
+homepage: "modern",      // Switch to "minimal" or "bold-dark"</code></pre>
+
+<!-- ═══════════════════════════════════════════ -->
+<h2 id="pricing-plans">Pricing Plans</h2>
+<p>Plans are defined in the config and rendered on the <code>/pricing</code> page automatically. Each plan has:</p>
+<pre><code>{
+  id: "pro",                           // Unique plan identifier
+  name: "Pro",                         // Display name
+  price: { monthly: 19, yearly: 190 }, // Prices in your currency
+  credits: 5000,                       // Monthly AI credits
+  features: ["Feature 1", "Feature 2"], // Feature bullet points
+  popular: true,                       // Optional: highlight this plan
+}</code></pre>
+
+<div class="callout callout-info">
+  <div class="callout-icon">&#x1f4a1;</div>
+  <div>For Stripe, you'll need to create corresponding Products and Prices in the Stripe Dashboard and set up env vars like <code>STRIPE_PRICE_ID_PRO_MONTHLY</code> and <code>STRIPE_PRICE_ID_PRO_YEARLY</code> for each plan + interval combination.</div>
+</div>
+
+<!-- ═══════════════════════════════════════════ -->
+<h2 id="theming">Theming</h2>
+<p>OpenBoil uses Tailwind CSS v4 with CSS custom properties for theming. Colors are defined in <code>src/styles/globals.css</code>.</p>
+
+<h3>Customizing Colors</h3>
+<p>Edit the <code>@theme</code> block in <code>src/styles/globals.css</code>:</p>
+<pre><code>@theme {
+  --color-primary: #6366f1;           /* Your brand color */
+  --color-primary-foreground: #ffffff;
+  --color-background: #ffffff;
+  --color-foreground: #0a0a0a;
+  /* ... more variables */
+}</code></pre>
+<p>Dark mode overrides are in the <code>.dark</code> block below it.</p>
+
+<h3>Light/Dark Toggle</h3>
+<p>The theme toggle in the header switches between light and dark mode. The user's preference is saved to <code>localStorage</code>.</p>
+
+<!-- ═══════════════════════════════════════════ -->
+<h2 id="provider-system">Provider System</h2>
+<p>The core differentiator of OpenBoil is the <strong>provider abstraction</strong>. Every service (auth, payments, database, AI, email) is defined as a TypeScript interface. Implementations are swapped at runtime based on your config.</p>
+
+<h3>How It Works</h3>
+<pre><code>// 1. Interface defines the contract (types.ts)
+export interface AuthProvider {
+  signIn(email: string, password: string): Promise&lt;AuthSession&gt;;
+  // ... other methods
+}
+
+// 2. Factory creates the right implementation (index.ts)
+export async function getAuthProvider(): Promise&lt;AuthProvider&gt; {
+  switch (config.providers.auth) {
+    case "firebase":  return new FirebaseAuthProvider();
+    case "supabase":  return new SupabaseAuthProvider();
+    default:          return new CustomAuthProvider();
+  }
+}
+
+// 3. Application code uses the factory (never the implementation directly)
+const auth = await getAuthProvider();
+const session = await auth.signIn(email, password);</code></pre>
+
+<div class="callout callout-success">
+  <div class="callout-icon">&#x2705;</div>
+  <div><strong>Zero unused code:</strong> Provider implementations are dynamically imported. If you use Stripe, the LemonSqueezy code is never loaded. This keeps your bundle clean.</div>
+</div>
+
+<!-- ═══════════════════════════════════════════ -->
+<h2 id="auth-providers">Authentication Providers</h2>
+
+<h3><span class="badge badge-green">custom</span> Custom (JWT + Google OAuth)</h3>
+<p>Fully functional auth using bcrypt for password hashing and JWT for session tokens. Includes Google OAuth.</p>
+<ul>
+  <li><strong>Passwords:</strong> Hashed with bcrypt (12 salt rounds)</li>
+  <li><strong>Sessions:</strong> JWT tokens stored in HTTP-only secure cookies (7-day expiry)</li>
+  <li><strong>Google OAuth:</strong> Standard OAuth2 code exchange flow</li>
+  <li><strong>Password Reset:</strong> Time-limited reset tokens with email delivery</li>
+  <li><strong>Env vars needed:</strong> <code>JWT_SECRET</code>, optionally <code>GOOGLE_CLIENT_ID</code> + <code>GOOGLE_CLIENT_SECRET</code></li>
+</ul>
+
+<h3><span class="badge badge-amber">firebase</span> Firebase Auth</h3>
+<p>Uses Firebase Admin SDK for server-side auth. Requires <code>npm install firebase-admin</code>.</p>
+<ul>
+  <li>Server-side session verification with <code>verifyIdToken()</code></li>
+  <li>Google OAuth via Firebase's built-in provider</li>
+  <li>Password sign-in must happen client-side via Firebase Client SDK</li>
+</ul>
+
+<h3><span class="badge badge-blue">supabase</span> Supabase Auth</h3>
+<p>Uses Supabase GoTrue REST API directly (no SDK dependency).</p>
+<ul>
+  <li>Email/password via <code>/auth/v1/signup</code> and <code>/auth/v1/token</code></li>
+  <li>Google OAuth via Supabase's built-in OAuth flow</li>
+  <li>Admin operations via service role key</li>
+</ul>
+
+<!-- ═══════════════════════════════════════════ -->
+<h2 id="payment-providers">Payment Providers</h2>
+
+<h3><span class="badge badge-blue">stripe</span> Stripe</h3>
+<p>Full Stripe integration using direct REST API calls (no SDK).</p>
+<ul>
+  <li><strong>Checkout:</strong> Creates Stripe Checkout Sessions for subscriptions</li>
+  <li><strong>Portal:</strong> Customer billing portal for self-service management</li>
+  <li><strong>Webhooks:</strong> Handles <code>customer.subscription.created/updated/deleted</code> and <code>invoice.payment_failed</code></li>
+  <li><strong>Signature verification:</strong> HMAC-SHA256 via Web Crypto API</li>
+</ul>
+
+<h3><span class="badge badge-amber">lemonsqueezy</span> LemonSqueezy</h3>
+<p>LemonSqueezy integration via JSON:API endpoints.</p>
+<ul>
+  <li><strong>Checkout:</strong> Creates checkout via variant IDs</li>
+  <li><strong>Webhooks:</strong> Handles <code>subscription_created/updated/cancelled/payment_failed</code></li>
+  <li><strong>Env vars:</strong> <code>LEMONSQUEEZY_VARIANT_ID_{PLAN}_{INTERVAL}</code> for each plan</li>
+</ul>
+
+<!-- ═══════════════════════════════════════════ -->
+<h2 id="database-providers">Database Providers</h2>
+
+<h3><span class="badge badge-green">drizzle</span> Drizzle + PostgreSQL <span class="badge badge-green">Recommended</span></h3>
+<p>Full type-safe ORM with complete schema. This is the most production-ready option.</p>
+
+<h4>Schema Tables</h4>
+<table>
+  <tr><th>Table</th><th>Fields</th></tr>
+  <tr><td><code>users</code></td><td>id, email, name, avatar, role, passwordHash, emailVerified, credits, createdAt, updatedAt</td></tr>
+  <tr><td><code>subscriptions</code></td><td>id, userId (FK), planId, status, currentPeriodStart, currentPeriodEnd, cancelAtPeriodEnd, externalId</td></tr>
+  <tr><td><code>usage</code></td><td>id, userId (FK), type (ai-text/ai-image/ai-document), credits, metadata (jsonb), createdAt</td></tr>
+  <tr><td><code>settings</code></td><td>id, userId (FK), preferences (jsonb), updatedAt</td></tr>
+</table>
+
+<h4>Database Commands</h4>
+<pre><code># Push schema to your database
+npm run db:push
+
+# Generate SQL migrations
+npm run db:generate
+
+# Open Drizzle Studio (visual database browser)
+npm run db:studio
+
+# Seed with sample data
+npm run seed</code></pre>
+
+<h3><span class="badge badge-amber">firestore</span> Firestore</h3>
+<p>Uses Firebase Admin SDK with dynamic import. Requires <code>npm install firebase-admin</code>.</p>
+
+<h3><span class="badge badge-blue">supabase</span> Supabase</h3>
+<p>Uses Supabase PostgREST API directly via fetch. No SDK dependency.</p>
+
+<!-- ═══════════════════════════════════════════ -->
+<h2 id="ai-providers">AI Providers</h2>
+
+<table>
+  <tr><th>Provider</th><th>Text Gen</th><th>Streaming</th><th>Image Gen</th><th>Doc Analysis</th></tr>
+  <tr><td><span class="badge badge-green">openai</span></td><td>GPT-4o</td><td>SSE</td><td>DALL-E 3</td><td>Via GPT-4o</td></tr>
+  <tr><td><span class="badge badge-amber">anthropic</span></td><td>Claude Sonnet</td><td>SSE</td><td>Not supported</td><td>Via Claude</td></tr>
+  <tr><td><span class="badge badge-blue">google</span></td><td>Gemini Pro</td><td>SSE</td><td>Not supported</td><td>Via Gemini</td></tr>
+</table>
+
+<div class="callout callout-warning">
+  <div class="callout-icon">&#x26a0;</div>
+  <div>Anthropic and Google AI providers do not support image generation. If you need image generation, use OpenAI or handle it separately.</div>
+</div>
+
+<!-- ═══════════════════════════════════════════ -->
+<h2 id="email-providers">Email Provider</h2>
+<p>Currently only Resend is supported. Emails are built with React Email for responsive, styled templates.</p>
+
+<h3>Email Templates</h3>
+<table>
+  <tr><th>Template</th><th>Triggered When</th></tr>
+  <tr><td><code>welcome.tsx</code></td><td>User signs up</td></tr>
+  <tr><td><code>password-reset.tsx</code></td><td>User requests password reset</td></tr>
+  <tr><td><code>subscription-confirmation.tsx</code></td><td>User subscribes to a plan</td></tr>
+  <tr><td><code>usage-warning.tsx</code></td><td>User approaches credit limit</td></tr>
+</table>
+
+<h3>Preview Emails</h3>
+<pre><code>npm run email:dev</code></pre>
+<p>Opens React Email's dev UI where you can preview all email templates with live reload.</p>
+
+<!-- ═══════════════════════════════════════════ -->
+<h2 id="authentication">Auth Pages &amp; API</h2>
+
+<h3>Pages</h3>
+<table>
+  <tr><th>URL</th><th>Description</th></tr>
+  <tr><td><code>/auth/login</code></td><td>Login form with email/password and Google OAuth</td></tr>
+  <tr><td><code>/auth/register</code></td><td>Registration form with password strength indicator</td></tr>
+  <tr><td><code>/auth/forgot-password</code></td><td>Password reset request form</td></tr>
+  <tr><td><code>/auth/callback</code></td><td>OAuth callback handler (redirects to dashboard)</td></tr>
+</table>
+
+<h3>API Endpoints</h3>
+<table>
+  <tr><th>Method</th><th>Endpoint</th><th>Description</th></tr>
+  <tr><td>POST</td><td><code>/api/auth/login</code></td><td>Sign in, returns user + sets session cookie</td></tr>
+  <tr><td>POST</td><td><code>/api/auth/register</code></td><td>Sign up new user</td></tr>
+  <tr><td>POST</td><td><code>/api/auth/logout</code></td><td>Sign out, clears session cookie</td></tr>
+  <tr><td>GET</td><td><code>/api/auth/me</code></td><td>Get current authenticated user</td></tr>
+  <tr><td>POST</td><td><code>/api/auth/forgot-password</code></td><td>Send password reset email</td></tr>
+  <tr><td>GET</td><td><code>/api/auth/google</code></td><td>Redirect to Google OAuth consent screen</td></tr>
+  <tr><td>GET</td><td><code>/api/auth/callback</code></td><td>Handle OAuth callback</td></tr>
+</table>
+
+<!-- ═══════════════════════════════════════════ -->
+<h2 id="dashboard">User Dashboard</h2>
+<p>The dashboard is a protected area available at <code>/dashboard</code>. It includes:</p>
+<table>
+  <tr><th>Page</th><th>Description</th></tr>
+  <tr><td><code>/dashboard</code></td><td>Overview with credits, plan info, quick actions</td></tr>
+  <tr><td><code>/dashboard/settings</code></td><td>Profile edit (name, avatar) and password change</td></tr>
+  <tr><td><code>/dashboard/billing</code></td><td>Current plan, usage meter, upgrade/manage subscription</td></tr>
+  <tr><td><code>/dashboard/usage</code></td><td>Detailed usage history with charts</td></tr>
+</table>
+
+<!-- ═══════════════════════════════════════════ -->
+<h2 id="admin">Admin Dashboard</h2>
+<p>Available at <code>/admin</code> for users with <code>role: "admin"</code>. Non-admin users are redirected to <code>/dashboard</code>.</p>
+<table>
+  <tr><th>Page</th><th>Description</th></tr>
+  <tr><td><code>/admin</code></td><td>Overview with stat cards (users, MRR, etc.) and charts</td></tr>
+  <tr><td><code>/admin/users</code></td><td>User table with search, ban, role change, delete</td></tr>
+  <tr><td><code>/admin/analytics</code></td><td>Signup trends and revenue charts (Recharts)</td></tr>
+  <tr><td><code>/admin/subscriptions</code></td><td>Subscription overview and plan distribution</td></tr>
+  <tr><td><code>/admin/usage</code></td><td>AI usage analytics by type</td></tr>
+  <tr><td><code>/admin/blog</code></td><td>Blog post management (publish, unpublish, delete)</td></tr>
+  <tr><td><code>/admin/settings</code></td><td>App settings (site name, maintenance mode)</td></tr>
+</table>
+
+<!-- ═══════════════════════════════════════════ -->
+<h2 id="ai-features">AI Features</h2>
+<p>Three AI tools are available in the dashboard:</p>
+
+<h3>Content Generator (<code>/ai/content</code>)</h3>
+<ul>
+  <li>Template selection: Blog Post, Marketing Copy, Product Description, Email, Custom</li>
+  <li>Temperature control (0.0 precise &rarr; 1.0 creative)</li>
+  <li><strong>Real-time streaming</strong> via Server-Sent Events</li>
+  <li>Cost: <strong>1 credit</strong> per generation</li>
+</ul>
+
+<h3>Image Generator (<code>/ai/image</code>)</h3>
+<ul>
+  <li>Text-to-image generation (OpenAI only &mdash; DALL-E 3)</li>
+  <li>Size options: 256x256, 512x512, 1024x1024</li>
+  <li>Generated images displayed in a gallery</li>
+  <li>Cost: <strong>5 credits</strong> per image</li>
+</ul>
+
+<h3>Document Analyzer (<code>/ai/document</code>)</h3>
+<ul>
+  <li>Upload text files (.txt, .md, .csv, .json, .xml, .html)</li>
+  <li>Three modes: Summarize, Extract Key Points, Q&amp;A</li>
+  <li>Cost: <strong>3 credits</strong> per analysis</li>
+</ul>
+
+<!-- ═══════════════════════════════════════════ -->
+<h2 id="blog-system">Blog System</h2>
+<p>Built with Astro Content Collections and MDX. Blog posts are Markdown files with frontmatter.</p>
+
+<h3>Adding a Blog Post</h3>
+<p>Create a new <code>.mdx</code> file in <code>src/content/blog/</code>:</p>
+<pre><code>---
+title: "My First Post"
+description: "A brief description for SEO and listing cards"
+pubDate: 2025-01-15
+author: "Your Name"
+category: "guides"
+image: "/blog/my-post-cover.jpg"  # optional
+draft: false
+---
+
+# My First Post
+
+Write your content here using **Markdown** and MDX.
+
+```javascript
+// You can include code blocks
+const greeting = "Hello, World!";
+```</code></pre>
+
+<h3>Blog Pages</h3>
+<table>
+  <tr><th>URL</th><th>Description</th></tr>
+  <tr><td><code>/blog</code></td><td>Blog listing with category filter</td></tr>
+  <tr><td><code>/blog/[slug]</code></td><td>Individual post with TOC and share buttons</td></tr>
+  <tr><td><code>/blog/category/[category]</code></td><td>Posts filtered by category</td></tr>
+</table>
+
+<!-- ═══════════════════════════════════════════ -->
+<h2 id="credit-system">Credit System</h2>
+<p>AI features consume credits. Each plan includes a monthly credit allowance.</p>
+
+<table>
+  <tr><th>Action</th><th>Cost</th></tr>
+  <tr><td>Text Generation</td><td>1 credit</td></tr>
+  <tr><td>Document Analysis</td><td>3 credits</td></tr>
+  <tr><td>Image Generation</td><td>5 credits</td></tr>
+</table>
+
+<p>Credit costs are defined in <code>src/lib/credits.ts</code>. When a user runs out of credits, AI features are blocked until credits refresh or they upgrade their plan.</p>
+
+<!-- ═══════════════════════════════════════════ -->
+<h2 id="email-templates">Email Templates</h2>
+<p>Emails are React Email components in <code>src/emails/</code>. Preview them with:</p>
+<pre><code>npm run email:dev</code></pre>
+
+<p>The email provider (<code>src/providers/email/resend.ts</code>) includes HTML templates for each email type. To customize, edit the templates in <code>src/emails/</code>.</p>
+
+<!-- ═══════════════════════════════════════════ -->
+<h2 id="project-structure">Project Structure</h2>
+<div class="file-tree">
+<span class="dir">openboil/</span>
+├── <strong>openboil.config.ts</strong>          <span class="comment"># Your single config file</span>
+├── <strong>.env.example</strong>                <span class="comment"># Environment variable template</span>
+├── astro.config.mjs              <span class="comment"># Astro + Vite configuration</span>
+├── drizzle.config.ts             <span class="comment"># Database ORM config</span>
+├── tsconfig.json                 <span class="comment"># TypeScript config with @/ alias</span>
+├── Dockerfile                    <span class="comment"># Docker deployment</span>
+├── docker-compose.yml            <span class="comment"># Docker + PostgreSQL</span>
+├── vercel.json                   <span class="comment"># Vercel deployment</span>
+├── netlify.toml                  <span class="comment"># Netlify deployment</span>
+│
+├── <span class="dir">scripts/</span>
+│   ├── setup.ts                  <span class="comment"># Interactive setup wizard</span>
+│   └── seed.ts                   <span class="comment"># Database seeding</span>
+│
+├── <span class="dir">src/</span>
+│   ├── <span class="dir">config/</span>                 <span class="comment"># Config schema &amp; resolution</span>
+│   │   ├── schema.ts             <span class="comment"># Zod validation schema</span>
+│   │   └── index.ts              <span class="comment"># Config export</span>
+│   │
+│   ├── <span class="dir">providers/</span>              <span class="comment"># Service provider abstractions</span>
+│   │   ├── <span class="dir">auth/</span>               <span class="comment"># custom.ts, firebase.ts, supabase.ts</span>
+│   │   ├── <span class="dir">payment/</span>            <span class="comment"># stripe.ts, lemonsqueezy.ts</span>
+│   │   ├── <span class="dir">database/</span>           <span class="comment"># drizzle/, firestore.ts, supabase.ts</span>
+│   │   ├── <span class="dir">ai/</span>                 <span class="comment"># openai.ts, anthropic.ts, google.ts</span>
+│   │   └── <span class="dir">email/</span>              <span class="comment"># resend.ts</span>
+│   │
+│   ├── middleware.ts              <span class="comment"># Auth guard &amp; session verification</span>
+│   │
+│   ├── <span class="dir">stores/</span>                 <span class="comment"># Nano Stores for client state</span>
+│   │   ├── auth.ts               <span class="comment"># User state ($user, $isAuthenticated)</span>
+│   │   ├── theme.ts              <span class="comment"># Theme state ($theme)</span>
+│   │   └── ui.ts                 <span class="comment"># UI state ($sidebarOpen, etc.)</span>
+│   │
+│   ├── <span class="dir">hooks/</span>                  <span class="comment"># React hooks</span>
+│   │   ├── useAuth.ts            <span class="comment"># Login, register, logout, fetchUser</span>
+│   │   ├── useSubscription.ts    <span class="comment"># Checkout, cancel, manage</span>
+│   │   ├── useCredits.ts         <span class="comment"># Get/refresh credits</span>
+│   │   └── useToast.ts           <span class="comment"># Toast notifications</span>
+│   │
+│   ├── <span class="dir">lib/</span>                    <span class="comment"># Shared utilities</span>
+│   │   ├── utils.ts              <span class="comment"># cn(), formatCurrency, formatDate</span>
+│   │   ├── pricing.ts            <span class="comment"># Plan helpers</span>
+│   │   ├── credits.ts            <span class="comment"># Credit consumption logic</span>
+│   │   └── seo.ts                <span class="comment"># SEO meta generator</span>
+│   │
+│   ├── <span class="dir">components/</span>
+│   │   ├── <span class="dir">ui/</span>                 <span class="comment"># 20 shadcn/ui primitives</span>
+│   │   ├── <span class="dir">layout/</span>             <span class="comment"># Header, Footer, Logo, ThemeToggle</span>
+│   │   ├── <span class="dir">auth/</span>               <span class="comment"># LoginForm, RegisterForm, etc.</span>
+│   │   ├── <span class="dir">admin/</span>              <span class="comment"># StatCard, UserTable, Charts</span>
+│   │   ├── <span class="dir">ai/</span>                 <span class="comment"># ContentGenerator, ImageGenerator</span>
+│   │   ├── <span class="dir">homepage/</span>           <span class="comment"># modern/, minimal/, bold-dark/</span>
+│   │   ├── <span class="dir">pricing/</span>            <span class="comment"># PricingTable, PlanCard</span>
+│   │   ├── <span class="dir">dashboard/</span>          <span class="comment"># ProfileForm, BillingPanel</span>
+│   │   └── <span class="dir">blog/</span>               <span class="comment"># BlogCard, TableOfContents</span>
+│   │
+│   ├── <span class="dir">layouts/</span>                <span class="comment"># 6 Astro layouts</span>
+│   ├── <span class="dir">pages/</span>                  <span class="comment"># All routes + API endpoints</span>
+│   ├── <span class="dir">content/</span>                <span class="comment"># MDX blog posts</span>
+│   ├── <span class="dir">emails/</span>                 <span class="comment"># React Email templates</span>
+│   └── <span class="dir">styles/</span>                 <span class="comment"># globals.css (Tailwind + theme)</span>
+</div>
+
+<!-- ═══════════════════════════════════════════ -->
+<h2 id="middleware">Middleware</h2>
+<p>The middleware (<code>src/middleware.ts</code>) runs on every request and handles:</p>
+<ol>
+  <li><strong>Session verification:</strong> Reads the <code>session</code> cookie, verifies the JWT token, and populates <code>Astro.locals.user</code></li>
+  <li><strong>Route protection:</strong> Redirects unauthenticated users to <code>/auth/login</code> for private routes</li>
+  <li><strong>Admin protection:</strong> Routes under <code>/admin/*</code> require <code>role: "admin"</code></li>
+</ol>
+
+<h3>Public Routes (No Auth Required)</h3>
+<pre><code>/                      # Homepage
+/pricing               # Pricing page
+/blog, /blog/*         # Blog (all posts)
+/about, /contact       # Static pages
+/terms, /privacy       # Legal pages
+/docs, /docs/*         # Documentation
+/auth/*                # Login, register, etc.
+/api/auth/*            # Auth API endpoints
+/api/webhooks/*        # Payment webhooks</code></pre>
+
+<h3>Protected Routes (Auth Required)</h3>
+<pre><code>/dashboard/*           # User dashboard
+/ai/*                  # AI features
+/admin/*               # Admin only (role: "admin")</code></pre>
+
+<!-- ═══════════════════════════════════════════ -->
+<h2 id="state-management">State Management</h2>
+<p>OpenBoil uses <strong>Nano Stores</strong> for cross-island state in Astro's island architecture. Stores are in <code>src/stores/</code>.</p>
+<pre><code>// Reading state in React components
+import { useStore } from "@nanostores/react";
+import { $user } from "@/stores/auth";
+
+function MyComponent() {
+  const user = useStore($user);
+  return &lt;p&gt;Hello, {user?.name}&lt;/p&gt;;
+}</code></pre>
+
+<!-- ═══════════════════════════════════════════ -->
+<h2 id="api-routes">API Routes</h2>
+<p>All API routes are in <code>src/pages/api/</code>. They use Astro's server endpoints with <code>export const prerender = false</code>.</p>
+
+<h3>Auth API</h3>
+<pre><code>POST /api/auth/login              # Sign in
+POST /api/auth/register           # Sign up
+POST /api/auth/logout             # Sign out
+GET  /api/auth/me                 # Get current user
+POST /api/auth/forgot-password    # Request password reset
+GET  /api/auth/google             # Google OAuth redirect</code></pre>
+
+<h3>Subscription API</h3>
+<pre><code>POST /api/subscriptions/checkout  # Create checkout session
+GET  /api/subscriptions/current   # Get current subscription
+POST /api/subscriptions/cancel    # Cancel subscription
+POST /api/subscriptions/portal    # Get billing portal URL</code></pre>
+
+<h3>AI API</h3>
+<pre><code>POST /api/ai/generate-content     # Text generation (SSE stream)
+POST /api/ai/generate-image       # Image generation
+POST /api/ai/analyze-document     # Document analysis</code></pre>
+
+<h3>Admin API</h3>
+<pre><code>GET  /api/admin/stats             # Dashboard stats
+GET  /api/admin/analytics         # Charts data
+GET  /api/admin/users             # List users
+PATCH/DELETE /api/admin/users     # Update/delete user
+GET/POST /api/admin/settings      # App settings</code></pre>
+
+<h3>Other</h3>
+<pre><code>GET  /api/credits                 # Get user's credit balance
+GET  /api/usage                   # Get usage history
+POST /api/webhooks/stripe         # Stripe webhook handler
+POST /api/webhooks/lemonsqueezy   # LemonSqueezy webhook handler</code></pre>
+
+<!-- ═══════════════════════════════════════════ -->
+<h2 id="deploy-vercel">Deploy to Vercel</h2>
+<div class="steps">
+  <div class="step">
+    <h4>Push your code to GitHub</h4>
+    <pre><code>git init && git add . && git commit -m "Initial commit"
+git remote add origin https://github.com/you/your-repo.git
+git push -u origin main</code></pre>
+  </div>
+  <div class="step">
+    <h4>Import to Vercel</h4>
+    <p>Go to <a href="https://vercel.com/new">vercel.com/new</a>, import your GitHub repo. Vercel auto-detects Astro via <code>vercel.json</code>.</p>
+  </div>
+  <div class="step">
+    <h4>Set environment variables</h4>
+    <p>In the Vercel dashboard, go to Settings &rarr; Environment Variables and add all your <code>.env</code> values. Set <code>DEPLOY_TARGET=vercel</code>.</p>
+  </div>
+  <div class="step">
+    <h4>Deploy</h4>
+    <p>Vercel will build and deploy automatically on every push to <code>main</code>.</p>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════ -->
+<h2 id="deploy-netlify">Deploy to Netlify</h2>
+<div class="steps">
+  <div class="step">
+    <h4>Push your code to GitHub</h4>
+    <p>Same as Vercel &mdash; push to a GitHub repo.</p>
+  </div>
+  <div class="step">
+    <h4>Import to Netlify</h4>
+    <p>Go to <a href="https://app.netlify.com/start">app.netlify.com/start</a> and import your repo. Netlify reads <code>netlify.toml</code> automatically.</p>
+  </div>
+  <div class="step">
+    <h4>Set environment variables</h4>
+    <p>In Site Settings &rarr; Environment Variables, add all your <code>.env</code> values. <code>DEPLOY_TARGET</code> is set to <code>netlify</code> in <code>netlify.toml</code>.</p>
+  </div>
+  <div class="step">
+    <h4>Deploy</h4>
+    <p>Deploys automatically on push.</p>
+  </div>
+</div>
+
+<div class="callout callout-info">
+  <div class="callout-icon">&#x1f4a1;</div>
+  <div>For Netlify, install the adapter first: <code>npm install @astrojs/netlify</code>. For Vercel: <code>npm install @astrojs/vercel</code>.</div>
+</div>
+
+<!-- ═══════════════════════════════════════════ -->
+<h2 id="deploy-docker">Deploy with Docker</h2>
+<h3>Using Docker Compose (recommended)</h3>
+<p>This starts both the app and PostgreSQL:</p>
+<pre><code># Build and start
+docker-compose up --build
+
+# The app runs at http://localhost:4321
+# PostgreSQL runs at localhost:5432</code></pre>
+
+<h3>Using Dockerfile Only</h3>
+<pre><code># Build the image
+docker build -t openboil .
+
+# Run the container
+docker run -p 4321:4321 --env-file .env openboil</code></pre>
+
+<div class="callout callout-warning">
+  <div class="callout-icon">&#x26a0;</div>
+  <div>When using Docker, make sure <code>DATABASE_URL</code> points to the Docker network hostname (e.g., <code>postgresql://openboil:openboil@db:5432/openboil</code> when using docker-compose).</div>
+</div>
+
+<!-- ═══════════════════════════════════════════ -->
+<h2 id="scripts">Scripts Reference</h2>
+<table>
+  <tr><th>Command</th><th>Description</th></tr>
+  <tr><td><code>npm run dev</code></td><td>Start development server at <code>localhost:4321</code></td></tr>
+  <tr><td><code>npm run build</code></td><td>Production build (outputs to <code>dist/</code>)</td></tr>
+  <tr><td><code>npm run preview</code></td><td>Preview the production build locally</td></tr>
+  <tr><td><code>npm run setup</code></td><td>Interactive setup wizard &mdash; generates config + .env</td></tr>
+  <tr><td><code>npm run seed</code></td><td>Seed database with sample data (admin + users)</td></tr>
+  <tr><td><code>npm run db:push</code></td><td>Push Drizzle schema to PostgreSQL</td></tr>
+  <tr><td><code>npm run db:generate</code></td><td>Generate SQL migration files</td></tr>
+  <tr><td><code>npm run db:studio</code></td><td>Open Drizzle Studio (visual DB browser)</td></tr>
+  <tr><td><code>npm run email:dev</code></td><td>Preview email templates in browser</td></tr>
+</table>
+
+<!-- ═══════════════════════════════════════════ -->
+<h2 id="all-pages">All Pages &amp; Routes</h2>
+
+<h3>Public Pages</h3>
+<table>
+  <tr><th>URL</th><th>Description</th></tr>
+  <tr><td><code>/</code></td><td>Homepage (configurable design)</td></tr>
+  <tr><td><code>/pricing</code></td><td>Pricing plans with monthly/yearly toggle</td></tr>
+  <tr><td><code>/blog</code></td><td>Blog listing with category filter</td></tr>
+  <tr><td><code>/blog/[slug]</code></td><td>Individual blog post</td></tr>
+  <tr><td><code>/blog/category/[cat]</code></td><td>Posts by category</td></tr>
+  <tr><td><code>/about</code></td><td>About page with team</td></tr>
+  <tr><td><code>/contact</code></td><td>Contact form</td></tr>
+  <tr><td><code>/terms</code></td><td>Terms of Service</td></tr>
+  <tr><td><code>/privacy</code></td><td>Privacy Policy</td></tr>
+  <tr><td><code>/docs</code></td><td>Documentation landing</td></tr>
+</table>
+
+<h3>Auth Pages</h3>
+<table>
+  <tr><th>URL</th><th>Description</th></tr>
+  <tr><td><code>/auth/login</code></td><td>Login form</td></tr>
+  <tr><td><code>/auth/register</code></td><td>Registration form</td></tr>
+  <tr><td><code>/auth/forgot-password</code></td><td>Password reset request</td></tr>
+  <tr><td><code>/auth/callback</code></td><td>OAuth callback handler</td></tr>
+</table>
+
+<h3>Dashboard Pages (requires login)</h3>
+<table>
+  <tr><th>URL</th><th>Description</th></tr>
+  <tr><td><code>/dashboard</code></td><td>Overview with stats and quick actions</td></tr>
+  <tr><td><code>/dashboard/settings</code></td><td>Profile and password settings</td></tr>
+  <tr><td><code>/dashboard/billing</code></td><td>Subscription and usage</td></tr>
+  <tr><td><code>/dashboard/usage</code></td><td>Usage history with charts</td></tr>
+  <tr><td><code>/ai/content</code></td><td>AI content generator</td></tr>
+  <tr><td><code>/ai/image</code></td><td>AI image generator</td></tr>
+  <tr><td><code>/ai/document</code></td><td>AI document analyzer</td></tr>
+</table>
+
+<h3>Admin Pages (requires admin role)</h3>
+<table>
+  <tr><th>URL</th><th>Description</th></tr>
+  <tr><td><code>/admin</code></td><td>Admin overview with stats</td></tr>
+  <tr><td><code>/admin/users</code></td><td>User management</td></tr>
+  <tr><td><code>/admin/analytics</code></td><td>Analytics charts</td></tr>
+  <tr><td><code>/admin/subscriptions</code></td><td>Subscription management</td></tr>
+  <tr><td><code>/admin/usage</code></td><td>Usage analytics</td></tr>
+  <tr><td><code>/admin/blog</code></td><td>Blog management</td></tr>
+  <tr><td><code>/admin/settings</code></td><td>App settings</td></tr>
+</table>
+
+<!-- ═══════════════════════════════════════════ -->
+<h2 id="tech-stack">Tech Stack</h2>
+<table>
+  <tr><th>Category</th><th>Technology</th><th>Purpose</th></tr>
+  <tr><td>Framework</td><td>Astro 5 + React 19</td><td>SSR with island architecture</td></tr>
+  <tr><td>Styling</td><td>Tailwind CSS v4</td><td>Utility-first CSS</td></tr>
+  <tr><td>UI</td><td>shadcn/ui + Radix UI</td><td>20 accessible components</td></tr>
+  <tr><td>State</td><td>Nano Stores</td><td>Cross-island client state</td></tr>
+  <tr><td>Validation</td><td>Zod</td><td>Config &amp; input validation</td></tr>
+  <tr><td>Database</td><td>Drizzle ORM</td><td>Type-safe PostgreSQL queries</td></tr>
+  <tr><td>Auth</td><td>JWT + bcrypt</td><td>Session management</td></tr>
+  <tr><td>Charts</td><td>Recharts</td><td>Dashboard analytics</td></tr>
+  <tr><td>Email</td><td>React Email + Resend</td><td>Transactional emails</td></tr>
+  <tr><td>Blog</td><td>MDX Content Collections</td><td>Git-based blog posts</td></tr>
+  <tr><td>Icons</td><td>Lucide React</td><td>SVG icon library</td></tr>
+</table>
+
+<hr>
+
+<p style="text-align: center; color: var(--text-muted); font-size: 13px; margin-top: 48px;">
+  OpenBoil &mdash; The Ultimate Open Source SaaS Boilerplate<br>
+  Built with Astro, React, Tailwind CSS, and shadcn/ui
+</p>
+
+</div>
+</body>
+</html>

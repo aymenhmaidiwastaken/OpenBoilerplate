@@ -1,0 +1,185 @@
+---
+import BaseLayout from "./BaseLayout.astro";
+import Logo from "@/components/layout/Logo.astro";
+import { ThemeToggle } from "@/components/layout/ThemeToggle";
+import type { SEOProps } from "@/lib/seo";
+
+interface Props extends SEOProps {}
+
+const user = Astro.locals.user;
+const pathname = Astro.url.pathname;
+
+const sidebarLinks = [
+  { href: "/admin", label: "Overview", icon: "overview" },
+  { href: "/admin/users", label: "Users", icon: "users" },
+  { href: "/admin/analytics", label: "Analytics", icon: "analytics" },
+  { href: "/admin/subscriptions", label: "Subscriptions", icon: "subscriptions" },
+  { href: "/admin/usage", label: "Usage", icon: "usage" },
+  { href: "/admin/blog", label: "Blog", icon: "blog" },
+  { href: "/admin/settings", label: "Settings", icon: "settings" },
+];
+
+function isActive(href: string): boolean {
+  if (href === "/admin") return pathname === "/admin";
+  return pathname.startsWith(href);
+}
+---
+
+<BaseLayout {...Astro.props}>
+  <div class="min-h-screen flex">
+    <!-- Sidebar -->
+    <aside class="hidden lg:flex lg:flex-col lg:w-64 border-r border-border bg-card">
+      <div class="h-16 flex items-center px-6 border-b border-border">
+        <Logo size="sm" />
+        <span class="ml-2 text-xs font-medium px-1.5 py-0.5 rounded bg-destructive/10 text-destructive">Admin</span>
+      </div>
+
+      <nav class="flex-1 p-4 space-y-1">
+        {sidebarLinks.map((link) => (
+          <a
+            href={link.href}
+            class:list={[
+              "flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-colors",
+              isActive(link.href)
+                ? "bg-primary/10 text-primary"
+                : "text-muted-foreground hover:bg-muted hover:text-foreground",
+            ]}
+          >
+            <span class="w-5 h-5 flex items-center justify-center">
+              {link.icon === "overview" && (
+                <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-4 0h4" /></svg>
+              )}
+              {link.icon === "users" && (
+                <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" /><circle cx="9" cy="7" r="4" /><path d="M23 21v-2a4 4 0 00-3-3.87" /><path d="M16 3.13a4 4 0 010 7.75" /></svg>
+              )}
+              {link.icon === "analytics" && (
+                <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M18 20V10M12 20V4M6 20v-6" /></svg>
+              )}
+              {link.icon === "subscriptions" && (
+                <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><rect x="1" y="4" width="22" height="16" rx="2" /><line x1="1" y1="10" x2="23" y2="10" /></svg>
+              )}
+              {link.icon === "usage" && (
+                <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12" /></svg>
+              )}
+              {link.icon === "blog" && (
+                <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M12 20h9M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z" /></svg>
+              )}
+              {link.icon === "settings" && (
+                <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3" /><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06a1.65 1.65 0 00.33-1.82 1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06a1.65 1.65 0 001.82.33H9a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06a1.65 1.65 0 00-.33 1.82V9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z" /></svg>
+              )}
+            </span>
+            {link.label}
+          </a>
+        ))}
+      </nav>
+
+      <div class="p-4 border-t border-border">
+        <a
+          href="/dashboard"
+          class="flex items-center gap-2 px-3 py-2 rounded-lg text-sm font-medium text-muted-foreground hover:bg-muted hover:text-foreground transition-colors"
+        >
+          <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
+          </svg>
+          Back to Dashboard
+        </a>
+      </div>
+    </aside>
+
+    <!-- Main area -->
+    <div class="flex-1 flex flex-col min-w-0">
+      <!-- Topbar -->
+      <header class="h-16 flex items-center justify-between px-4 sm:px-6 border-b border-border bg-card">
+        <button
+          class="lg:hidden inline-flex items-center justify-center h-9 w-9 rounded-md hover:bg-muted transition-colors"
+          aria-label="Toggle sidebar"
+          id="admin-sidebar-toggle"
+        >
+          <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+          </svg>
+        </button>
+
+        <div class="lg:hidden flex items-center gap-2">
+          <Logo size="sm" />
+          <span class="text-xs font-medium px-1.5 py-0.5 rounded bg-destructive/10 text-destructive">Admin</span>
+        </div>
+
+        <div class="hidden lg:block" />
+
+        <div class="flex items-center gap-2">
+          <ThemeToggle client:only="react" />
+
+          {user && (
+            <div class="flex items-center gap-2 px-3 py-1.5 rounded-full">
+              <div class="w-7 h-7 rounded-full bg-primary text-primary-foreground flex items-center justify-center text-xs font-bold">
+                {user.name?.charAt(0) || user.email.charAt(0).toUpperCase()}
+              </div>
+              <span class="hidden sm:inline text-sm font-medium">{user.name || user.email}</span>
+            </div>
+          )}
+        </div>
+      </header>
+
+      <!-- Mobile sidebar overlay -->
+      <div id="admin-mobile-sidebar" class="hidden fixed inset-0 z-40 lg:hidden">
+        <div class="fixed inset-0 bg-black/50 backdrop-blur-sm" id="admin-sidebar-backdrop"></div>
+        <aside class="fixed inset-y-0 left-0 z-50 w-64 bg-card border-r border-border shadow-xl">
+          <div class="h-16 flex items-center justify-between px-6 border-b border-border">
+            <div class="flex items-center gap-2">
+              <Logo size="sm" />
+              <span class="text-xs font-medium px-1.5 py-0.5 rounded bg-destructive/10 text-destructive">Admin</span>
+            </div>
+            <button class="h-9 w-9 inline-flex items-center justify-center rounded-md hover:bg-muted" id="admin-sidebar-close">
+              <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            </button>
+          </div>
+          <nav class="p-4 space-y-1">
+            {sidebarLinks.map((link) => (
+              <a
+                href={link.href}
+                class:list={[
+                  "flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-colors",
+                  isActive(link.href)
+                    ? "bg-primary/10 text-primary"
+                    : "text-muted-foreground hover:bg-muted hover:text-foreground",
+                ]}
+              >
+                {link.label}
+              </a>
+            ))}
+          </nav>
+          <div class="absolute bottom-0 left-0 right-0 p-4 border-t border-border">
+            <a
+              href="/dashboard"
+              class="flex items-center gap-2 px-3 py-2 rounded-lg text-sm font-medium text-muted-foreground hover:bg-muted hover:text-foreground transition-colors"
+            >
+              Back to Dashboard
+            </a>
+          </div>
+        </aside>
+      </div>
+
+      <!-- Page content -->
+      <main class="flex-1 p-4 sm:p-6 lg:p-8">
+        <slot />
+      </main>
+    </div>
+  </div>
+
+  <script is:inline>
+    const toggle = document.getElementById("admin-sidebar-toggle");
+    const sidebar = document.getElementById("admin-mobile-sidebar");
+    const backdrop = document.getElementById("admin-sidebar-backdrop");
+    const close = document.getElementById("admin-sidebar-close");
+
+    function openSidebar() { sidebar?.classList.remove("hidden"); }
+    function closeSidebar() { sidebar?.classList.add("hidden"); }
+
+    toggle?.addEventListener("click", openSidebar);
+    backdrop?.addEventListener("click", closeSidebar);
+    close?.addEventListener("click", closeSidebar);
+  </script>
+</BaseLayout>

@@ -1,0 +1,12 @@
+---
+interface Props {
+  class?: string;
+  compact?: boolean;
+}
+
+const { class: className, compact = false } = Astro.props;
+---
+
+<section class:list={[compact ? "py-16" : "py-24", className]}>
+  <slot />
+</section>

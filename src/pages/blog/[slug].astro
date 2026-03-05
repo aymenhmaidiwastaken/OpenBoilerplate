@@ -1,0 +1,126 @@
+---
+import BlogLayout from "@/layouts/BlogLayout.astro";
+import TableOfContents from "@/components/blog/TableOfContents";
+import ShareButtons from "@/components/blog/ShareButtons";
+import { getCollection, render } from "astro:content";
+
+export async function getStaticPaths() {
+  const posts = await getCollection("blog", ({ data }) => !data.draft);
+  return posts.map((post) => ({
+    params: { slug: post.id },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+const { Content, headings } = await render(post);
+
+const { title, description, pubDate, updatedDate, author, category, image } = post.data;
+
+const formattedDate = new Date(pubDate).toLocaleDateString("en-US", {
+  year: "numeric",
+  month: "long",
+  day: "numeric",
+});
+
+const formattedUpdatedDate = updatedDate
+  ? new Date(updatedDate).toLocaleDateString("en-US", {
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+    })
+  : null;
+
+const categoryColors: Record<string, string> = {
+  guides: "bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-300",
+  architecture: "bg-purple-100 text-purple-800 dark:bg-purple-900/30 dark:text-purple-300",
+  features: "bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-300",
+};
+
+const badgeClass = categoryColors[category] || "bg-muted text-muted-foreground";
+const pageUrl = new URL(`/blog/${post.id}`, Astro.site || Astro.url.origin).toString();
+
+const tocHeadings = headings.filter((h) => h.depth >= 2 && h.depth <= 3);
+---
+
+<BlogLayout
+  title={title}
+  description={description}
+  type="article"
+  publishedTime={pubDate.toISOString()}
+  author={author}
+  image={image}
+>
+  <div class="flex gap-12">
+    <!-- Main Content -->
+    <div class="min-w-0 flex-1 max-w-3xl mx-auto">
+      <!-- Header -->
+      <header class="mb-10">
+        <div class="mb-4 flex items-center gap-3">
+          <a
+            href={`/blog/category/${category}`}
+            class={`inline-block rounded-full px-3 py-1 text-xs font-medium ${badgeClass}`}
+          >
+            {category}
+          </a>
+        </div>
+        <h1 class="text-3xl font-bold tracking-tight text-foreground sm:text-4xl lg:text-5xl">
+          {title}
+        </h1>
+        <p class="mt-4 text-lg text-muted-foreground">
+          {description}
+        </p>
+        <div class="mt-6 flex flex-wrap items-center gap-3 text-sm text-muted-foreground">
+          <div class="flex items-center gap-2">
+            <div class="flex h-8 w-8 items-center justify-center rounded-full bg-primary text-xs font-bold text-primary-foreground">
+              {author.charAt(0)}
+            </div>
+            <span class="font-medium text-foreground">{author}</span>
+          </div>
+          <span class="text-border">&middot;</span>
+          <time datetime={pubDate.toISOString()}>{formattedDate}</time>
+          {formattedUpdatedDate && (
+            <>
+              <span class="text-border">&middot;</span>
+              <span>Updated {formattedUpdatedDate}</span>
+            </>
+          )}
+        </div>
+      </header>
+
+      <!-- Article Content -->
+      <div class="prose prose-neutral dark:prose-invert max-w-none
+        prose-headings:font-semibold prose-headings:tracking-tight
+        prose-a:text-primary prose-a:no-underline hover:prose-a:underline
+        prose-img:rounded-lg prose-pre:bg-muted prose-pre:border prose-pre:border-border
+        prose-code:before:content-none prose-code:after:content-none">
+        <Content />
+      </div>
+
+      <!-- Footer -->
+      <div class="mt-12 border-t border-border pt-8">
+        <div class="flex flex-col gap-6 sm:flex-row sm:items-center sm:justify-between">
+          <ShareButtons url={pageUrl} title={title} client:load />
+          <a
+            href="/blog"
+            class="inline-flex items-center gap-2 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18" />
+            </svg>
+            Back to all posts
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Sidebar: Table of Contents -->
+    {tocHeadings.length > 0 && (
+      <aside class="hidden xl:block w-56 shrink-0">
+        <div class="sticky top-24">
+          <TableOfContents headings={tocHeadings} client:load />
+        </div>
+      </aside>
+    )}
+  </div>
+</BlogLayout>

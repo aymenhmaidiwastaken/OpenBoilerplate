@@ -1,0 +1,298 @@
+---
+import MarketingLayout from "@/layouts/MarketingLayout.astro";
+import { config } from "@/config";
+import DocumentDemo from "@/components/ai/DocumentDemo";
+const appName = config.app.name;
+---
+
+<style is:global>
+  :root {
+    --color-primary: #10b981;
+    --color-primary-foreground: #ffffff;
+    --color-ring: #10b981;
+  }
+  .dark {
+    --color-primary: #34d399;
+    --color-primary-foreground: #0a0a0a;
+    --color-ring: #34d399;
+  }
+</style>
+
+<MarketingLayout title="AI Document Analyzer" description="Upload PDFs and documents to summarize, extract key points, and ask questions with AI.">
+  <!-- Hero -->
+  <section class="relative py-20 sm:py-28 overflow-hidden">
+    <div class="absolute inset-0 bg-gradient-to-b from-emerald-500/5 to-transparent"></div>
+    <div class="relative max-w-5xl mx-auto px-4 sm:px-6 text-center">
+      <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 text-sm font-medium mb-8">
+        <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09z" /></svg>
+        AI-Powered Analysis
+      </div>
+      <h1 class="text-4xl sm:text-6xl font-bold tracking-tight mb-6">
+        Understand any document <br class="hidden sm:block" />
+        <span class="text-transparent bg-clip-text bg-gradient-to-r from-emerald-500 to-teal-500">in seconds</span>
+      </h1>
+      <p class="text-lg sm:text-xl text-muted-foreground max-w-2xl mx-auto mb-10">
+        Upload PDFs, reports, or contracts. Get instant summaries, extract key points, and ask questions — all powered by AI.
+      </p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <a href="/auth/register" class="inline-flex items-center justify-center h-12 px-8 rounded-lg bg-gradient-to-r from-emerald-500 to-teal-500 text-white font-semibold hover:opacity-90 transition-opacity shadow-lg shadow-emerald-500/25">
+          Start Analyzing Free
+        </a>
+        <a href="/pricing" class="inline-flex items-center justify-center h-12 px-8 rounded-lg border border-border bg-card font-semibold hover:bg-muted transition-colors">
+          View Pricing
+        </a>
+      </div>
+
+      <DocumentDemo client:load />
+    </div>
+  </section>
+
+  <!-- Features -->
+  <section class="py-20 bg-muted/30">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6">
+      <div class="text-center mb-16">
+        <h2 class="text-3xl sm:text-4xl font-bold mb-4">Powerful document intelligence</h2>
+        <p class="text-lg text-muted-foreground max-w-2xl mx-auto">Extract insights from any document format with cutting-edge AI models.</p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div class="rounded-xl border border-border bg-card p-8">
+          <div class="w-12 h-12 rounded-xl bg-emerald-500/10 flex items-center justify-center mb-5">
+            <svg class="w-6 h-6 text-emerald-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 9.776c.112-.017.227-.026.344-.026h15.812c.117 0 .232.009.344.026m-16.5 0a2.25 2.25 0 00-1.883 2.542l.857 6a2.25 2.25 0 002.227 1.932H19.05a2.25 2.25 0 002.227-1.932l.857-6a2.25 2.25 0 00-1.883-2.542m-16.5 0V6A2.25 2.25 0 016 3.75h3.879a1.5 1.5 0 011.06.44l2.122 2.12a1.5 1.5 0 001.06.44H18A2.25 2.25 0 0120.25 9v.776" /></svg>
+          </div>
+          <h3 class="text-lg font-semibold mb-2">Multi-Format Upload</h3>
+          <p class="text-muted-foreground text-sm leading-relaxed">Upload PDFs, Word documents, text files, and more. AI handles any document format seamlessly.</p>
+        </div>
+
+        <div class="rounded-xl border border-border bg-card p-8">
+          <div class="w-12 h-12 rounded-xl bg-teal-500/10 flex items-center justify-center mb-5">
+            <svg class="w-6 h-6 text-teal-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 12h16.5m-16.5 3.75h16.5M3.75 19.5h16.5M5.625 4.5h12.75a1.875 1.875 0 010 3.75H5.625a1.875 1.875 0 010-3.75z" /></svg>
+          </div>
+          <h3 class="text-lg font-semibold mb-2">Smart Summaries</h3>
+          <p class="text-muted-foreground text-sm leading-relaxed">Get concise, accurate summaries of lengthy documents. Save hours of reading time.</p>
+        </div>
+
+        <div class="rounded-xl border border-border bg-card p-8">
+          <div class="w-12 h-12 rounded-xl bg-cyan-500/10 flex items-center justify-center mb-5">
+            <svg class="w-6 h-6 text-cyan-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M20.25 8.511c.884.284 1.5 1.128 1.5 2.097v4.286c0 1.136-.847 2.1-1.98 2.193-.34.027-.68.052-1.02.072v3.091l-3-3c-1.354 0-2.694-.055-4.02-.163a2.115 2.115 0 01-.825-.242m9.345-8.334a2.126 2.126 0 00-.476-.095 48.64 48.64 0 00-8.048 0c-1.131.094-1.976 1.057-1.976 2.192v4.286c0 .837.46 1.58 1.155 1.951m9.345-8.334V6.637c0-1.621-1.152-3.026-2.76-3.235A48.455 48.455 0 0011.25 3c-2.115 0-4.198.137-6.24.402-1.608.209-2.76 1.614-2.76 3.235v6.226c0 1.621 1.152 3.026 2.76 3.235.577.075 1.157.14 1.74.194V21l4.155-4.155" /></svg>
+          </div>
+          <h3 class="text-lg font-semibold mb-2">Ask Questions</h3>
+          <p class="text-muted-foreground text-sm leading-relaxed">Chat with your documents. Ask specific questions and get precise, referenced answers.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- How It Works -->
+  <section class="py-20">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6">
+      <div class="text-center mb-16">
+        <h2 class="text-3xl sm:text-4xl font-bold mb-4">How it works</h2>
+        <p class="text-lg text-muted-foreground max-w-2xl mx-auto">From upload to insights in three simple steps.</p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div class="text-center">
+          <div class="w-14 h-14 rounded-full bg-emerald-500/10 flex items-center justify-center mx-auto mb-5">
+            <span class="text-xl font-bold text-emerald-500">1</span>
+          </div>
+          <h3 class="text-lg font-semibold mb-2">Upload your document</h3>
+          <p class="text-sm text-muted-foreground">Drop in any PDF, Word doc, or text file — we support all major document formats.</p>
+        </div>
+
+        <div class="text-center">
+          <div class="w-14 h-14 rounded-full bg-teal-500/10 flex items-center justify-center mx-auto mb-5">
+            <span class="text-xl font-bold text-teal-500">2</span>
+          </div>
+          <h3 class="text-lg font-semibold mb-2">Choose analysis mode</h3>
+          <p class="text-sm text-muted-foreground">Select from summarize, extract key points, or ask questions — pick what fits your needs.</p>
+        </div>
+
+        <div class="text-center">
+          <div class="w-14 h-14 rounded-full bg-cyan-500/10 flex items-center justify-center mx-auto mb-5">
+            <span class="text-xl font-bold text-cyan-500">3</span>
+          </div>
+          <h3 class="text-lg font-semibold mb-2">Get instant insights</h3>
+          <p class="text-sm text-muted-foreground">AI processes your document and delivers accurate, actionable results in seconds.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Use Cases -->
+  <section class="py-20 bg-muted/30">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6">
+      <div class="text-center mb-16">
+        <h2 class="text-3xl sm:text-4xl font-bold mb-4">Built for professionals</h2>
+        <p class="text-lg text-muted-foreground max-w-2xl mx-auto">From legal teams to researchers, document analysis for every industry.</p>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 max-w-4xl mx-auto">
+        <div class="flex gap-4 p-6 rounded-xl border border-border bg-card">
+          <div class="w-10 h-10 rounded-lg bg-emerald-500/10 flex-shrink-0 flex items-center justify-center">
+            <svg class="w-5 h-5 text-emerald-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 3v17.25m0 0c-1.472 0-2.882.265-4.185.75M12 20.25c1.472 0 2.882.265 4.185.75M18.75 4.97A48.416 48.416 0 0012 4.5c-2.291 0-4.545.16-6.75.47m13.5 0c1.01.143 2.01.317 3 .52m-3-.52l2.62 10.726c.122.499-.106 1.028-.589 1.202a5.988 5.988 0 01-2.031.352 5.988 5.988 0 01-2.031-.352c-.483-.174-.711-.703-.59-1.202L18.75 4.971zm-16.5.52c.99-.203 1.99-.377 3-.52m0 0l2.62 10.726c.122.499-.106 1.028-.589 1.202a5.989 5.989 0 01-2.031.352 5.989 5.989 0 01-2.031-.352c-.483-.174-.711-.703-.59-1.202L5.25 4.971z" /></svg>
+          </div>
+          <div>
+            <h3 class="font-semibold mb-1">Legal & Contracts</h3>
+            <p class="text-sm text-muted-foreground">Review contracts, extract clauses, and identify key terms instantly.</p>
+          </div>
+        </div>
+
+        <div class="flex gap-4 p-6 rounded-xl border border-border bg-card">
+          <div class="w-10 h-10 rounded-lg bg-teal-500/10 flex-shrink-0 flex items-center justify-center">
+            <svg class="w-5 h-5 text-teal-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4.26 10.147a60.436 60.436 0 00-.491 6.347A48.627 48.627 0 0112 20.904a48.627 48.627 0 018.232-4.41 60.46 60.46 0 00-.491-6.347m-15.482 0a50.57 50.57 0 00-2.658-.813A59.905 59.905 0 0112 3.493a59.902 59.902 0 0110.399 5.84c-.896.248-1.783.52-2.658.814m-15.482 0A50.697 50.697 0 0112 13.489a50.702 50.702 0 017.74-3.342M6.75 15a.75.75 0 100-1.5.75.75 0 000 1.5zm0 0v-3.675A55.378 55.378 0 0112 8.443m-7.007 11.55A5.981 5.981 0 006.75 15.75v-1.5" /></svg>
+          </div>
+          <div>
+            <h3 class="font-semibold mb-1">Academic Research</h3>
+            <p class="text-sm text-muted-foreground">Summarize papers, compare findings, and extract citations effortlessly.</p>
+          </div>
+        </div>
+
+        <div class="flex gap-4 p-6 rounded-xl border border-border bg-card">
+          <div class="w-10 h-10 rounded-lg bg-cyan-500/10 flex-shrink-0 flex items-center justify-center">
+            <svg class="w-5 h-5 text-cyan-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 013 19.875v-6.75zM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V8.625zM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V4.125z" /></svg>
+          </div>
+          <div>
+            <h3 class="font-semibold mb-1">Financial Reports</h3>
+            <p class="text-sm text-muted-foreground">Analyze earnings, extract financial data, and compare quarterly results.</p>
+          </div>
+        </div>
+
+        <div class="flex gap-4 p-6 rounded-xl border border-border bg-card">
+          <div class="w-10 h-10 rounded-lg bg-green-500/10 flex-shrink-0 flex items-center justify-center">
+            <svg class="w-5 h-5 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12h3.75M9 15h3.75M9 18h3.75m3 .75H18a2.25 2.25 0 002.25-2.25V6.108c0-1.135-.845-2.098-1.976-2.192a48.424 48.424 0 00-1.123-.08m-5.801 0c-.065.21-.1.433-.1.664 0 .414.336.75.75.75h4.5a.75.75 0 00.75-.75 2.25 2.25 0 00-.1-.664m-5.8 0A2.251 2.251 0 0113.5 2.25H15c1.012 0 1.867.668 2.15 1.586m-5.8 0c-.376.023-.75.05-1.124.08C9.095 4.01 8.25 4.973 8.25 6.108V8.25m0 0H4.875c-.621 0-1.125.504-1.125 1.125v11.25c0 .621.504 1.125 1.125 1.125h9.75c.621 0 1.125-.504 1.125-1.125V9.375c0-.621-.504-1.125-1.125-1.125H8.25zM6.75 12h.008v.008H6.75V12zm0 3h.008v.008H6.75V15zm0 3h.008v.008H6.75V18z" /></svg>
+          </div>
+          <div>
+            <h3 class="font-semibold mb-1">HR & Compliance</h3>
+            <p class="text-sm text-muted-foreground">Review policies, check compliance, and summarize handbooks quickly.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials -->
+  <section class="py-20">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6">
+      <div class="text-center mb-16">
+        <h2 class="text-3xl sm:text-4xl font-bold mb-4">Trusted by professionals</h2>
+        <p class="text-lg text-muted-foreground max-w-2xl mx-auto">See what our users are saying about AI-powered document analysis.</p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div class="rounded-xl border border-border bg-card p-8">
+          <div class="flex items-center gap-1 mb-4">
+            {[...Array(5)].map(() => <svg class="w-4 h-4 text-yellow-400 fill-yellow-400" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>)}
+          </div>
+          <p class="text-sm text-muted-foreground mb-6">"We review hundreds of contracts monthly. This tool summarizes each one in seconds and flags key clauses we need to focus on. It's saved us countless hours."</p>
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-full bg-gradient-to-br from-emerald-400 to-teal-500 flex items-center justify-center text-white text-sm font-bold">RH</div>
+            <div>
+              <p class="text-sm font-semibold">Rachel H.</p>
+              <p class="text-xs text-muted-foreground">Legal Operations Manager</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="rounded-xl border border-border bg-card p-8">
+          <div class="flex items-center gap-1 mb-4">
+            {[...Array(5)].map(() => <svg class="w-4 h-4 text-yellow-400 fill-yellow-400" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>)}
+          </div>
+          <p class="text-sm text-muted-foreground mb-6">"As a PhD researcher, I process dozens of papers weekly. The Q&A feature lets me ask specific questions about any paper and get precise answers with references. Incredible."</p>
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-full bg-gradient-to-br from-teal-400 to-cyan-500 flex items-center justify-center text-white text-sm font-bold">KW</div>
+            <div>
+              <p class="text-sm font-semibold">Dr. Kevin W.</p>
+              <p class="text-xs text-muted-foreground">Research Scientist</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="rounded-xl border border-border bg-card p-8">
+          <div class="flex items-center gap-1 mb-4">
+            {[...Array(5)].map(() => <svg class="w-4 h-4 text-yellow-400 fill-yellow-400" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>)}
+          </div>
+          <p class="text-sm text-muted-foreground mb-6">"Our finance team uses it daily for quarterly reports. The data extraction feature pulls out every key metric automatically — no more manual spreadsheet work."</p>
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-full bg-gradient-to-br from-emerald-400 to-green-500 flex items-center justify-center text-white text-sm font-bold">LN</div>
+            <div>
+              <p class="text-sm font-semibold">Lisa N.</p>
+              <p class="text-xs text-muted-foreground">Financial Analyst</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="py-20 bg-muted/30">
+    <div class="max-w-3xl mx-auto px-4 sm:px-6">
+      <div class="text-center mb-16">
+        <h2 class="text-3xl sm:text-4xl font-bold mb-4">Frequently asked questions</h2>
+        <p class="text-lg text-muted-foreground">Everything you need to know about AI document analysis.</p>
+      </div>
+
+      <div class="space-y-4">
+        <details class="group rounded-xl border border-border bg-card">
+          <summary class="flex cursor-pointer items-center justify-between p-6 font-semibold [&::-webkit-details-marker]:hidden">
+            What document formats are supported?
+            <svg class="w-5 h-5 text-muted-foreground transition-transform group-open:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" /></svg>
+          </summary>
+          <div class="px-6 pb-6 text-sm text-muted-foreground">We support PDF, DOCX, DOC, TXT, RTF, ODT, and many more formats. You can also paste text directly. Our AI handles scanned PDFs with built-in OCR for text extraction.</div>
+        </details>
+
+        <details class="group rounded-xl border border-border bg-card">
+          <summary class="flex cursor-pointer items-center justify-between p-6 font-semibold [&::-webkit-details-marker]:hidden">
+            How accurate are the summaries?
+            <svg class="w-5 h-5 text-muted-foreground transition-transform group-open:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" /></svg>
+          </summary>
+          <div class="px-6 pb-6 text-sm text-muted-foreground">Our AI achieves over 95% accuracy in capturing key points and main themes. Summaries are designed to preserve critical information while reducing document length by 80-90%. We always recommend reviewing summaries for mission-critical use cases.</div>
+        </details>
+
+        <details class="group rounded-xl border border-border bg-card">
+          <summary class="flex cursor-pointer items-center justify-between p-6 font-semibold [&::-webkit-details-marker]:hidden">
+            Is my document data secure?
+            <svg class="w-5 h-5 text-muted-foreground transition-transform group-open:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" /></svg>
+          </summary>
+          <div class="px-6 pb-6 text-sm text-muted-foreground">Absolutely. All documents are encrypted in transit and at rest. We never use your documents to train our models. Files are automatically deleted after processing unless you choose to save them. We are SOC 2 Type II certified.</div>
+        </details>
+
+        <details class="group rounded-xl border border-border bg-card">
+          <summary class="flex cursor-pointer items-center justify-between p-6 font-semibold [&::-webkit-details-marker]:hidden">
+            What is the maximum document size?
+            <svg class="w-5 h-5 text-muted-foreground transition-transform group-open:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" /></svg>
+          </summary>
+          <div class="px-6 pb-6 text-sm text-muted-foreground">Free accounts can upload documents up to 10MB and 50 pages. Paid plans support documents up to 100MB and 500+ pages. For extremely large documents, our AI processes them in chunks to ensure thorough analysis.</div>
+        </details>
+
+        <details class="group rounded-xl border border-border bg-card">
+          <summary class="flex cursor-pointer items-center justify-between p-6 font-semibold [&::-webkit-details-marker]:hidden">
+            Can I analyze multiple documents at once?
+            <svg class="w-5 h-5 text-muted-foreground transition-transform group-open:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" /></svg>
+          </summary>
+          <div class="px-6 pb-6 text-sm text-muted-foreground">Yes, paid plans support batch analysis where you can upload multiple documents and get summaries, comparisons, and cross-document insights. This is particularly useful for research and due diligence workflows.</div>
+        </details>
+
+        <details class="group rounded-xl border border-border bg-card">
+          <summary class="flex cursor-pointer items-center justify-between p-6 font-semibold [&::-webkit-details-marker]:hidden">
+            Does it work with non-English documents?
+            <svg class="w-5 h-5 text-muted-foreground transition-transform group-open:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" /></svg>
+          </summary>
+          <div class="px-6 pb-6 text-sm text-muted-foreground">Yes, our AI supports document analysis in over 30 languages. You can even upload a document in one language and receive the summary or analysis in another language of your choice.</div>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="py-20 bg-gradient-to-b from-emerald-500/5 to-teal-500/5">
+    <div class="max-w-3xl mx-auto px-4 sm:px-6 text-center">
+      <h2 class="text-3xl sm:text-4xl font-bold mb-4">Stop reading, start understanding</h2>
+      <p class="text-lg text-muted-foreground mb-8">Join professionals using {appName} to analyze documents 10x faster.</p>
+      <a href="/auth/register" class="inline-flex items-center justify-center h-12 px-8 rounded-lg bg-gradient-to-r from-emerald-500 to-teal-500 text-white font-semibold hover:opacity-90 transition-opacity shadow-lg shadow-emerald-500/25">
+        Get Started Free &rarr;
+      </a>
+    </div>
+  </section>
+</MarketingLayout>

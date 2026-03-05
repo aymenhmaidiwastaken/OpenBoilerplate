@@ -1,0 +1,217 @@
+---
+title: "Deploying Your SaaS Application"
+description: "Step-by-step guide to deploying your OpenBoil application to Vercel, Netlify, or with Docker. Covers environment setup, build configuration, and production best practices."
+pubDate: 2026-02-01
+author: "OpenBoil Team"
+category: "guides"
+draft: false
+---
+
+## Deployment Options
+
+OpenBoil supports multiple deployment targets out of the box. Choose the one that best fits your infrastructure:
+
+- **Vercel** - Zero-config serverless deployment
+- **Netlify** - Serverless with built-in forms and identity
+- **Docker** - Full control with containerized deployment
+
+## Preparing for Production
+
+Before deploying, ensure your environment is production-ready:
+
+```bash
+# Build the project to check for errors
+npm run build
+
+# Run type checking
+npm run typecheck
+```
+
+Make sure all environment variables are set for your production environment. Never commit `.env` files to version control.
+
+## Deploying to Vercel
+
+### Step 1: Set the Deploy Target
+
+```bash
+# .env.production
+DEPLOY_TARGET=vercel
+```
+
+### Step 2: Install the Vercel Adapter
+
+The adapter is already included in OpenBoil's dependencies. The `astro.config.ts` dynamically loads it based on the `DEPLOY_TARGET` environment variable.
+
+### Step 3: Deploy
+
+```bash
+# Install Vercel CLI
+npm i -g vercel
+
+# Deploy
+vercel --prod
+```
+
+Or connect your GitHub repository to Vercel for automatic deployments on every push.
+
+### Vercel Environment Variables
+
+Set your environment variables in the Vercel dashboard under **Settings > Environment Variables**. Key variables include:
+
+```
+DATABASE_URL=postgresql://...
+AUTH_SECRET=your-secret-here
+STRIPE_SECRET_KEY=sk_live_...
+STRIPE_WEBHOOK_SECRET=whsec_...
+```
+
+## Deploying to Netlify
+
+### Step 1: Set the Deploy Target
+
+```bash
+# .env.production
+DEPLOY_TARGET=netlify
+```
+
+### Step 2: Deploy
+
+```bash
+# Install Netlify CLI
+npm i -g netlify-cli
+
+# Build and deploy
+netlify deploy --prod --build
+```
+
+### Netlify Configuration
+
+Create a `netlify.toml` at your project root:
+
+```toml
+[build]
+  command = "npm run build"
+  publish = "dist"
+
+[build.environment]
+  DEPLOY_TARGET = "netlify"
+```
+
+## Deploying with Docker
+
+### Step 1: Set the Deploy Target
+
+```bash
+# .env.production
+DEPLOY_TARGET=node
+```
+
+### Step 2: Dockerfile
+
+OpenBoil includes a production-ready Dockerfile:
+
+```dockerfile
+FROM node:20-alpine AS builder
+WORKDIR /app
+COPY package*.json ./
+RUN npm ci
+COPY . .
+RUN DEPLOY_TARGET=node npm run build
+
+FROM node:20-alpine AS runner
+WORKDIR /app
+COPY --from=builder /app/dist ./dist
+COPY --from=builder /app/node_modules ./node_modules
+COPY --from=builder /app/package.json ./
+ENV HOST=0.0.0.0
+ENV PORT=4321
+EXPOSE 4321
+CMD ["node", "dist/server/entry.mjs"]
+```
+
+### Step 3: Build and Run
+
+```bash
+# Build the Docker image
+docker build -t my-saas-app .
+
+# Run the container
+docker run -p 4321:4321 --env-file .env.production my-saas-app
+```
+
+### Docker Compose
+
+For a complete setup with a database:
+
+```yaml
+version: "3.8"
+services:
+  app:
+    build: .
+    ports:
+      - "4321:4321"
+    env_file:
+      - .env.production
+    depends_on:
+      - db
+
+  db:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_DB: saas
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+volumes:
+  pgdata:
+```
+
+## Production Checklist
+
+Before going live, verify the following:
+
+- All environment variables are set in your production environment
+- Database migrations have been applied
+- Stripe webhooks are configured with the production endpoint
+- OAuth redirect URIs are updated for the production domain
+- A custom domain is configured with SSL
+- Error monitoring is set up (e.g., Sentry)
+- Rate limiting is enabled for API routes
+- CORS headers are properly configured
+
+## Monitoring and Logging
+
+For production monitoring, consider adding:
+
+```typescript
+// src/middleware.ts - request logging example
+import { defineMiddleware } from "astro:middleware";
+
+export const onRequest = defineMiddleware(async (context, next) => {
+  const start = Date.now();
+  const response = await next();
+  const duration = Date.now() - start;
+
+  console.log(
+    JSON.stringify({
+      method: context.request.method,
+      url: context.url.pathname,
+      status: response.status,
+      duration,
+      timestamp: new Date().toISOString(),
+    })
+  );
+
+  return response;
+});
+```
+
+## Next Steps
+
+Once deployed, monitor your application and iterate:
+
+- Set up CI/CD pipelines for automated testing and deployment
+- Configure preview deployments for pull requests
+- Implement health check endpoints for uptime monitoring

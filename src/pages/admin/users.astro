@@ -1,0 +1,15 @@
+---
+import AdminLayout from "@/layouts/AdminLayout.astro";
+import { UserTable } from "@/components/admin/UserTable";
+---
+
+<AdminLayout title="User Management">
+  <div class="space-y-6">
+    <div>
+      <h2 class="text-2xl font-bold tracking-tight">Users</h2>
+      <p class="text-muted-foreground">Manage user accounts, roles, and access.</p>
+    </div>
+
+    <UserTable client:load />
+  </div>
+</AdminLayout>

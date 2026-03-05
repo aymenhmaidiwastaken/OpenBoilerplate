@@ -1,0 +1,106 @@
+---
+import MarketingLayout from "@/layouts/MarketingLayout.astro";
+---
+
+<MarketingLayout title="Contact" description="Get in touch with the OpenBoil team.">
+  <section class="py-20 px-4">
+    <div class="max-w-5xl mx-auto">
+      <div class="text-center mb-12">
+        <h1 class="text-4xl md:text-5xl font-bold tracking-tight mb-4">Contact Us</h1>
+        <p class="text-lg text-muted-foreground">
+          Have a question or feedback? We would love to hear from you.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <!-- Contact Form -->
+        <div class="md:col-span-2">
+          <div class="rounded-xl border border-border bg-card text-card-foreground shadow p-6">
+            <form class="space-y-6">
+              <div class="space-y-2">
+                <label for="name" class="text-sm font-medium leading-none">Name</label>
+                <input
+                  type="text"
+                  id="name"
+                  name="name"
+                  placeholder="Your name"
+                  required
+                  class="flex h-9 w-full rounded-md border border-border bg-transparent px-3 py-1 text-base shadow-sm transition-colors placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring md:text-sm"
+                />
+              </div>
+
+              <div class="space-y-2">
+                <label for="email" class="text-sm font-medium leading-none">Email</label>
+                <input
+                  type="email"
+                  id="email"
+                  name="email"
+                  placeholder="you@example.com"
+                  required
+                  class="flex h-9 w-full rounded-md border border-border bg-transparent px-3 py-1 text-base shadow-sm transition-colors placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring md:text-sm"
+                />
+              </div>
+
+              <div class="space-y-2">
+                <label for="subject" class="text-sm font-medium leading-none">Subject</label>
+                <input
+                  type="text"
+                  id="subject"
+                  name="subject"
+                  placeholder="How can we help?"
+                  required
+                  class="flex h-9 w-full rounded-md border border-border bg-transparent px-3 py-1 text-base shadow-sm transition-colors placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring md:text-sm"
+                />
+              </div>
+
+              <div class="space-y-2">
+                <label for="message" class="text-sm font-medium leading-none">Message</label>
+                <textarea
+                  id="message"
+                  name="message"
+                  placeholder="Tell us more about your question or feedback..."
+                  rows="5"
+                  required
+                  class="flex min-h-[60px] w-full rounded-md border border-border bg-transparent px-3 py-2 text-base shadow-sm placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring md:text-sm"
+                ></textarea>
+              </div>
+
+              <button
+                type="submit"
+                class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-colors bg-primary text-primary-foreground shadow hover:bg-primary/90 h-9 px-4 py-2"
+              >
+                Send Message
+              </button>
+            </form>
+          </div>
+        </div>
+
+        <!-- Contact Info Sidebar -->
+        <div class="space-y-6">
+          <div class="rounded-xl border border-border bg-card text-card-foreground shadow p-6">
+            <h3 class="font-semibold mb-3">Email</h3>
+            <p class="text-sm text-muted-foreground">support@openboil.dev</p>
+          </div>
+
+          <div class="rounded-xl border border-border bg-card text-card-foreground shadow p-6">
+            <h3 class="font-semibold mb-3">Location</h3>
+            <p class="text-sm text-muted-foreground">
+              123 Developer Lane<br />
+              San Francisco, CA 94102<br />
+              United States
+            </p>
+          </div>
+
+          <div class="rounded-xl border border-border bg-card text-card-foreground shadow p-6">
+            <h3 class="font-semibold mb-3">Social</h3>
+            <div class="space-y-2 text-sm text-muted-foreground">
+              <p>GitHub: @openboil</p>
+              <p>Twitter: @openboil</p>
+              <p>Discord: discord.gg/openboil</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</MarketingLayout>

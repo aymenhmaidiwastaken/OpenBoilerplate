@@ -1,0 +1,23 @@
+---
+import { config } from "@/config";
+
+interface Props {
+  class?: string;
+  size?: "sm" | "md" | "lg";
+}
+
+const { class: className, size = "md" } = Astro.props;
+
+const sizeClasses = {
+  sm: "text-lg",
+  md: "text-xl",
+  lg: "text-2xl",
+};
+---
+
+<a href="/" class:list={["flex items-center gap-2 font-bold", sizeClasses[size], className]}>
+  <span class="inline-flex items-center justify-center w-8 h-8 rounded-lg bg-primary text-primary-foreground text-sm font-bold">
+    {config.app.name.charAt(0)}
+  </span>
+  <span>{config.app.name}</span>
+</a>

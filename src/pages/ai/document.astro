@@ -1,0 +1,22 @@
+---
+import DashboardLayout from "@/layouts/DashboardLayout.astro";
+import DocumentAnalyzer from "@/components/ai/DocumentAnalyzer";
+import { getActiveTool } from "@/lib/ai-tool";
+
+const tool = getActiveTool();
+if (tool.type !== "document") {
+  return Astro.redirect("/dashboard/ai");
+}
+---
+
+<DashboardLayout title="AI Document Analyzer">
+  <div class="space-y-6">
+    <div>
+      <h1 class="text-3xl font-bold tracking-tight">AI Document Analyzer</h1>
+      <p class="text-muted-foreground">
+        Upload documents and use AI to summarize, extract key points, or answer questions about the content.
+      </p>
+    </div>
+    <DocumentAnalyzer client:load />
+  </div>
+</DashboardLayout>

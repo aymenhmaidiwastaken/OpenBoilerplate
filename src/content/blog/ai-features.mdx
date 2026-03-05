@@ -1,0 +1,185 @@
+---
+title: "Building AI-Powered Features"
+description: "Add intelligent features to your SaaS with OpenBoil's AI integration layer. Supports OpenAI, Anthropic, and other LLM providers out of the box."
+pubDate: 2026-01-10
+author: "OpenBoil Team"
+category: "features"
+draft: false
+---
+
+## AI in Your SaaS
+
+Adding AI capabilities to a SaaS product can be a significant differentiator. OpenBoil makes it straightforward by providing a unified AI provider layer that works with multiple LLM services.
+
+## Configuration
+
+Enable AI features in your config:
+
+```typescript
+// openboil.config.ts
+{
+  ai: {
+    provider: "openai",     // or "anthropic"
+    model: "gpt-4o",        // default model
+    maxTokens: 4096,
+  }
+}
+```
+
+Set the appropriate API key in your environment:
+
+```bash
+# .env
+OPENAI_API_KEY=sk-...
+# or
+ANTHROPIC_API_KEY=sk-ant-...
+```
+
+## Using the AI Provider
+
+The AI provider is accessible through a simple API:
+
+```typescript
+import { getAIProvider } from "@/providers/ai";
+
+const ai = getAIProvider();
+
+// Simple text generation
+const response = await ai.generateText(
+  "Write a welcome email for a new user named John"
+);
+
+// Chat completion
+const chatResponse = await ai.chat([
+  { role: "system", content: "You are a helpful assistant." },
+  { role: "user", content: "How do I reset my password?" },
+]);
+```
+
+## Streaming Responses
+
+For real-time UI updates, use the streaming API:
+
+```typescript
+import { getAIProvider } from "@/providers/ai";
+
+const ai = getAIProvider();
+
+const stream = ai.stream([
+  { role: "user", content: "Explain quantum computing" },
+]);
+
+for await (const chunk of stream) {
+  process.stdout.write(chunk.text);
+}
+```
+
+## Building a Chat API Route
+
+Here is a complete example of an AI-powered chat endpoint:
+
+```typescript
+// src/pages/api/ai/chat.ts
+import type { APIRoute } from "astro";
+import { getAIProvider } from "@/providers/ai";
+
+export const POST: APIRoute = async ({ request, locals }) => {
+  if (!locals.user) {
+    return new Response("Unauthorized", { status: 401 });
+  }
+
+  const { messages } = await request.json();
+  const ai = getAIProvider();
+
+  const stream = ai.stream(messages, {
+    model: "gpt-4o",
+    maxTokens: 2048,
+  });
+
+  const encoder = new TextEncoder();
+  const readable = new ReadableStream({
+    async start(controller) {
+      for await (const chunk of stream) {
+        controller.enqueue(
+          encoder.encode(`data: ${JSON.stringify(chunk)}\n\n`)
+        );
+      }
+      controller.enqueue(encoder.encode("data: [DONE]\n\n"));
+      controller.close();
+    },
+  });
+
+  return new Response(readable, {
+    headers: {
+      "Content-Type": "text/event-stream",
+      "Cache-Control": "no-cache",
+      Connection: "keep-alive",
+    },
+  });
+};
+```
+
+## Building a Chat Component
+
+Pair the API route with a React component on the frontend:
+
+```tsx
+import { useState, useRef } from "react";
+
+function ChatWidget() {
+  const [messages, setMessages] = useState([]);
+  const [input, setInput] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+
+  async function sendMessage() {
+    if (!input.trim() || isLoading) return;
+
+    const userMessage = { role: "user", content: input };
+    setMessages((prev) => [...prev, userMessage]);
+    setInput("");
+    setIsLoading(true);
+
+    const res = await fetch("/api/ai/chat", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ messages: [...messages, userMessage] }),
+    });
+
+    // Handle streaming response...
+    setIsLoading(false);
+  }
+
+  return (
+    <div className="flex flex-col h-96 border rounded-lg">
+      {/* Chat UI */}
+    </div>
+  );
+}
+```
+
+## Rate Limiting and Usage Tracking
+
+Protect your AI endpoints with rate limiting and track usage per user:
+
+```typescript
+import { rateLimit } from "@/lib/rate-limit";
+
+export const POST: APIRoute = async ({ request, locals }) => {
+  const limit = await rateLimit(locals.user.id, {
+    maxRequests: 50,
+    windowMs: 60 * 60 * 1000, // 1 hour
+  });
+
+  if (!limit.allowed) {
+    return new Response("Rate limit exceeded", { status: 429 });
+  }
+
+  // ... proceed with AI call
+};
+```
+
+## Next Steps
+
+- Explore the provider system to understand how AI providers are swapped
+- Add custom system prompts for your specific use case
+- Implement conversation history persistence with your database

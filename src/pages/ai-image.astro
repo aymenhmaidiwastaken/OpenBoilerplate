@@ -1,0 +1,298 @@
+---
+import MarketingLayout from "@/layouts/MarketingLayout.astro";
+import { config } from "@/config";
+import ImageDemo from "@/components/ai/ImageDemo";
+const appName = config.app.name;
+---
+
+<style is:global>
+  :root {
+    --color-primary: #f59e0b;
+    --color-primary-foreground: #0a0a0a;
+    --color-ring: #f59e0b;
+  }
+  .dark {
+    --color-primary: #fbbf24;
+    --color-primary-foreground: #0a0a0a;
+    --color-ring: #fbbf24;
+  }
+</style>
+
+<MarketingLayout title="AI Image Generator" description="Create stunning images from text prompts with AI-powered image generation.">
+  <!-- Hero -->
+  <section class="relative py-20 sm:py-28 overflow-hidden">
+    <div class="absolute inset-0 bg-gradient-to-b from-amber-500/5 to-transparent"></div>
+    <div class="relative max-w-5xl mx-auto px-4 sm:px-6 text-center">
+      <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-amber-500/10 text-amber-600 dark:text-amber-400 text-sm font-medium mb-8">
+        <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909M3.75 21h16.5a2.25 2.25 0 002.25-2.25V5.25a2.25 2.25 0 00-2.25-2.25H3.75a2.25 2.25 0 00-2.25 2.25v13.5a2.25 2.25 0 002.25 2.25z" /></svg>
+        AI-Powered Images
+      </div>
+      <h1 class="text-4xl sm:text-6xl font-bold tracking-tight mb-6">
+        Turn words into <br class="hidden sm:block" />
+        <span class="text-transparent bg-clip-text bg-gradient-to-r from-amber-500 to-orange-500">stunning visuals</span>
+      </h1>
+      <p class="text-lg sm:text-xl text-muted-foreground max-w-2xl mx-auto mb-10">
+        Describe any image you can imagine and watch AI bring it to life. No design skills needed — just your creativity.
+      </p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <a href="/auth/register" class="inline-flex items-center justify-center h-12 px-8 rounded-lg bg-gradient-to-r from-amber-500 to-orange-500 text-white font-semibold hover:opacity-90 transition-opacity shadow-lg shadow-amber-500/25">
+          Start Creating Free
+        </a>
+        <a href="/pricing" class="inline-flex items-center justify-center h-12 px-8 rounded-lg border border-border bg-card font-semibold hover:bg-muted transition-colors">
+          View Pricing
+        </a>
+      </div>
+
+      <ImageDemo client:load />
+    </div>
+  </section>
+
+  <!-- Features -->
+  <section class="py-20 bg-muted/30">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6">
+      <div class="text-center mb-16">
+        <h2 class="text-3xl sm:text-4xl font-bold mb-4">Professional image creation, simplified</h2>
+        <p class="text-lg text-muted-foreground max-w-2xl mx-auto">From concept to visual in seconds with state-of-the-art AI models.</p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div class="rounded-xl border border-border bg-card p-8">
+          <div class="w-12 h-12 rounded-xl bg-amber-500/10 flex items-center justify-center mb-5">
+            <svg class="w-6 h-6 text-amber-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09z" /></svg>
+          </div>
+          <h3 class="text-lg font-semibold mb-2">Text-to-Image</h3>
+          <p class="text-muted-foreground text-sm leading-relaxed">Simply describe what you want. AI generates photorealistic or artistic images from your text.</p>
+        </div>
+
+        <div class="rounded-xl border border-border bg-card p-8">
+          <div class="w-12 h-12 rounded-xl bg-orange-500/10 flex items-center justify-center mb-5">
+            <svg class="w-6 h-6 text-orange-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 3.75v4.5m0-4.5h4.5m-4.5 0L9 9M3.75 20.25v-4.5m0 4.5h4.5m-4.5 0L9 15M20.25 3.75h-4.5m4.5 0v4.5m0-4.5L15 9m5.25 11.25h-4.5m4.5 0v-4.5m0 4.5L15 15" /></svg>
+          </div>
+          <h3 class="text-lg font-semibold mb-2">Multiple Sizes</h3>
+          <p class="text-muted-foreground text-sm leading-relaxed">Generate images in any aspect ratio — square, landscape, portrait, or custom dimensions.</p>
+        </div>
+
+        <div class="rounded-xl border border-border bg-card p-8">
+          <div class="w-12 h-12 rounded-xl bg-red-500/10 flex items-center justify-center mb-5">
+            <svg class="w-6 h-6 text-red-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 17.25v3.375c0 .621-.504 1.125-1.125 1.125h-9.75a1.125 1.125 0 01-1.125-1.125V7.875c0-.621.504-1.125 1.125-1.125H6.75a9.06 9.06 0 011.5.124m7.5 10.376h3.375c.621 0 1.125-.504 1.125-1.125V11.25c0-4.46-3.243-8.161-7.5-8.876a9.06 9.06 0 00-1.5-.124H9.375c-.621 0-1.125.504-1.125 1.125v3.5m7.5 10.375H9.375a1.125 1.125 0 01-1.125-1.125v-9.25m12 6.625v-1.875a3.375 3.375 0 00-3.375-3.375h-1.5a1.125 1.125 0 01-1.125-1.125v-1.5a3.375 3.375 0 00-3.375-3.375H9.75" /></svg>
+          </div>
+          <h3 class="text-lg font-semibold mb-2">Batch Variations</h3>
+          <p class="text-muted-foreground text-sm leading-relaxed">Generate multiple variations from a single prompt to find the perfect image.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- How It Works -->
+  <section class="py-20">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6">
+      <div class="text-center mb-16">
+        <h2 class="text-3xl sm:text-4xl font-bold mb-4">How it works</h2>
+        <p class="text-lg text-muted-foreground max-w-2xl mx-auto">From description to download in three simple steps.</p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div class="text-center">
+          <div class="w-14 h-14 rounded-full bg-amber-500/10 flex items-center justify-center mx-auto mb-5">
+            <span class="text-xl font-bold text-amber-500">1</span>
+          </div>
+          <h3 class="text-lg font-semibold mb-2">Describe your vision</h3>
+          <p class="text-sm text-muted-foreground">Type a description of the image you want — be as detailed or as simple as you like.</p>
+        </div>
+
+        <div class="text-center">
+          <div class="w-14 h-14 rounded-full bg-orange-500/10 flex items-center justify-center mx-auto mb-5">
+            <span class="text-xl font-bold text-orange-500">2</span>
+          </div>
+          <h3 class="text-lg font-semibold mb-2">AI creates it</h3>
+          <p class="text-sm text-muted-foreground">Our AI generates multiple variations of your image in seconds using cutting-edge models.</p>
+        </div>
+
+        <div class="text-center">
+          <div class="w-14 h-14 rounded-full bg-red-500/10 flex items-center justify-center mx-auto mb-5">
+            <span class="text-xl font-bold text-red-500">3</span>
+          </div>
+          <h3 class="text-lg font-semibold mb-2">Download and use</h3>
+          <p class="text-sm text-muted-foreground">Pick your favorite, download in high resolution, and use it anywhere — no licensing worries.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Use Cases -->
+  <section class="py-20 bg-muted/30">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6">
+      <div class="text-center mb-16">
+        <h2 class="text-3xl sm:text-4xl font-bold mb-4">Images for every purpose</h2>
+        <p class="text-lg text-muted-foreground max-w-2xl mx-auto">From marketing materials to social content, generate exactly what you need.</p>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 max-w-4xl mx-auto">
+        <div class="flex gap-4 p-6 rounded-xl border border-border bg-card">
+          <div class="w-10 h-10 rounded-lg bg-amber-500/10 flex-shrink-0 flex items-center justify-center">
+            <svg class="w-5 h-5 text-amber-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 3v11.25A2.25 2.25 0 006 16.5h2.25M3.75 3h-1.5m1.5 0h16.5m0 0h1.5m-1.5 0v11.25A2.25 2.25 0 0118 16.5h-2.25m-7.5 0h7.5m-7.5 0l-1 3m8.5-3l1 3m0 0l.5 1.5m-.5-1.5h-9.5m0 0l-.5 1.5" /></svg>
+          </div>
+          <div>
+            <h3 class="font-semibold mb-1">Marketing & Ads</h3>
+            <p class="text-sm text-muted-foreground">Eye-catching visuals for campaigns, banners, and advertisements.</p>
+          </div>
+        </div>
+
+        <div class="flex gap-4 p-6 rounded-xl border border-border bg-card">
+          <div class="w-10 h-10 rounded-lg bg-orange-500/10 flex-shrink-0 flex items-center justify-center">
+            <svg class="w-5 h-5 text-orange-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 21a9.004 9.004 0 008.716-6.747M12 21a9.004 9.004 0 01-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9S9.515 3 12 3m0 0a8.997 8.997 0 017.843 4.582M12 3a8.997 8.997 0 00-7.843 4.582m15.686 0A11.953 11.953 0 0112 10.5c-2.998 0-5.74-1.1-7.843-2.918m15.686 0A8.959 8.959 0 0121 12c0 .778-.099 1.533-.284 2.253m0 0A17.919 17.919 0 0112 16.5c-3.162 0-6.133-.815-8.716-2.247m0 0A9.015 9.015 0 013 12c0-1.605.42-3.113 1.157-4.418" /></svg>
+          </div>
+          <div>
+            <h3 class="font-semibold mb-1">Social Media Content</h3>
+            <p class="text-sm text-muted-foreground">Scroll-stopping images sized perfectly for every platform.</p>
+          </div>
+        </div>
+
+        <div class="flex gap-4 p-6 rounded-xl border border-border bg-card">
+          <div class="w-10 h-10 rounded-lg bg-red-500/10 flex-shrink-0 flex items-center justify-center">
+            <svg class="w-5 h-5 text-red-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 7.125C2.25 6.504 2.754 6 3.375 6h6c.621 0 1.125.504 1.125 1.125v3.75c0 .621-.504 1.125-1.125 1.125h-6a1.125 1.125 0 01-1.125-1.125v-3.75zM14.25 8.625c0-.621.504-1.125 1.125-1.125h5.25c.621 0 1.125.504 1.125 1.125v8.25c0 .621-.504 1.125-1.125 1.125h-5.25a1.125 1.125 0 01-1.125-1.125v-8.25zM3.75 16.125c0-.621.504-1.125 1.125-1.125h5.25c.621 0 1.125.504 1.125 1.125v2.25c0 .621-.504 1.125-1.125 1.125h-5.25a1.125 1.125 0 01-1.125-1.125v-2.25z" /></svg>
+          </div>
+          <div>
+            <h3 class="font-semibold mb-1">Product Mockups</h3>
+            <p class="text-sm text-muted-foreground">Realistic product shots and lifestyle images for e-commerce.</p>
+          </div>
+        </div>
+
+        <div class="flex gap-4 p-6 rounded-xl border border-border bg-card">
+          <div class="w-10 h-10 rounded-lg bg-yellow-500/10 flex-shrink-0 flex items-center justify-center">
+            <svg class="w-5 h-5 text-yellow-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9.53 16.122a3 3 0 00-5.78 1.128 2.25 2.25 0 01-2.4 2.245 4.5 4.5 0 008.4-2.245c0-.399-.078-.78-.22-1.128zm0 0a15.998 15.998 0 003.388-1.62m-5.043-.025a15.994 15.994 0 011.622-3.395m3.42 3.42a15.995 15.995 0 004.764-4.648l3.876-5.814a1.151 1.151 0 00-1.597-1.597L14.146 6.32a15.996 15.996 0 00-4.649 4.763m3.42 3.42a6.776 6.776 0 00-3.42-3.42" /></svg>
+          </div>
+          <div>
+            <h3 class="font-semibold mb-1">Concept Art & Illustrations</h3>
+            <p class="text-sm text-muted-foreground">Artistic illustrations, concept art, and creative designs.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials -->
+  <section class="py-20">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6">
+      <div class="text-center mb-16">
+        <h2 class="text-3xl sm:text-4xl font-bold mb-4">Loved by designers and creators</h2>
+        <p class="text-lg text-muted-foreground max-w-2xl mx-auto">See what our users are saying about AI-powered image generation.</p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div class="rounded-xl border border-border bg-card p-8">
+          <div class="flex items-center gap-1 mb-4">
+            {[...Array(5)].map(() => <svg class="w-4 h-4 text-yellow-400 fill-yellow-400" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>)}
+          </div>
+          <p class="text-sm text-muted-foreground mb-6">"I used to spend $500+ per campaign on stock photos. Now I generate exactly what I need in seconds. The quality rivals professional photography."</p>
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-full bg-gradient-to-br from-amber-400 to-orange-500 flex items-center justify-center text-white text-sm font-bold">DM</div>
+            <div>
+              <p class="text-sm font-semibold">David M.</p>
+              <p class="text-xs text-muted-foreground">Digital Marketing Director</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="rounded-xl border border-border bg-card p-8">
+          <div class="flex items-center gap-1 mb-4">
+            {[...Array(5)].map(() => <svg class="w-4 h-4 text-yellow-400 fill-yellow-400" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>)}
+          </div>
+          <p class="text-sm text-muted-foreground mb-6">"As a solo entrepreneur, I can't afford a designer. This tool lets me create professional visuals for my brand in minutes. Game changer."</p>
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-full bg-gradient-to-br from-orange-400 to-red-500 flex items-center justify-center text-white text-sm font-bold">AP</div>
+            <div>
+              <p class="text-sm font-semibold">Aisha P.</p>
+              <p class="text-xs text-muted-foreground">Startup Founder</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="rounded-xl border border-border bg-card p-8">
+          <div class="flex items-center gap-1 mb-4">
+            {[...Array(5)].map(() => <svg class="w-4 h-4 text-yellow-400 fill-yellow-400" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>)}
+          </div>
+          <p class="text-sm text-muted-foreground mb-6">"We use it for rapid concept art and mood boards. What used to take our design team days now takes minutes. The batch variation feature is incredible."</p>
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-full bg-gradient-to-br from-yellow-400 to-amber-500 flex items-center justify-center text-white text-sm font-bold">TC</div>
+            <div>
+              <p class="text-sm font-semibold">Tom C.</p>
+              <p class="text-xs text-muted-foreground">Creative Director</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="py-20 bg-muted/30">
+    <div class="max-w-3xl mx-auto px-4 sm:px-6">
+      <div class="text-center mb-16">
+        <h2 class="text-3xl sm:text-4xl font-bold mb-4">Frequently asked questions</h2>
+        <p class="text-lg text-muted-foreground">Everything you need to know about AI image generation.</p>
+      </div>
+
+      <div class="space-y-4">
+        <details class="group rounded-xl border border-border bg-card">
+          <summary class="flex cursor-pointer items-center justify-between p-6 font-semibold [&::-webkit-details-marker]:hidden">
+            What image styles can the AI generate?
+            <svg class="w-5 h-5 text-muted-foreground transition-transform group-open:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" /></svg>
+          </summary>
+          <div class="px-6 pb-6 text-sm text-muted-foreground">Our AI can generate photorealistic images, digital art, illustrations, watercolors, oil paintings, 3D renders, anime styles, pixel art, and more. You can specify any artistic style in your prompt.</div>
+        </details>
+
+        <details class="group rounded-xl border border-border bg-card">
+          <summary class="flex cursor-pointer items-center justify-between p-6 font-semibold [&::-webkit-details-marker]:hidden">
+            What image resolutions are available?
+            <svg class="w-5 h-5 text-muted-foreground transition-transform group-open:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" /></svg>
+          </summary>
+          <div class="px-6 pb-6 text-sm text-muted-foreground">We support resolutions up to 2048x2048 pixels. You can choose from standard sizes (1024x1024, 1024x1792, 1792x1024) or specify custom dimensions on paid plans. All images are generated in high quality.</div>
+        </details>
+
+        <details class="group rounded-xl border border-border bg-card">
+          <summary class="flex cursor-pointer items-center justify-between p-6 font-semibold [&::-webkit-details-marker]:hidden">
+            How many images can I generate per month?
+            <svg class="w-5 h-5 text-muted-foreground transition-transform group-open:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" /></svg>
+          </summary>
+          <div class="px-6 pb-6 text-sm text-muted-foreground">The free plan includes 25 image generations per month. Paid plans start at 200 images/month with unlimited generation available on our Pro plan. Each generation produces up to 4 variations.</div>
+        </details>
+
+        <details class="group rounded-xl border border-border bg-card">
+          <summary class="flex cursor-pointer items-center justify-between p-6 font-semibold [&::-webkit-details-marker]:hidden">
+            Can I use the generated images commercially?
+            <svg class="w-5 h-5 text-muted-foreground transition-transform group-open:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" /></svg>
+          </summary>
+          <div class="px-6 pb-6 text-sm text-muted-foreground">Yes, all images generated with our tool are yours to use commercially. You can use them in marketing materials, social media, websites, print media, and products without any additional licensing fees.</div>
+        </details>
+
+        <details class="group rounded-xl border border-border bg-card">
+          <summary class="flex cursor-pointer items-center justify-between p-6 font-semibold [&::-webkit-details-marker]:hidden">
+            Can I edit or refine generated images?
+            <svg class="w-5 h-5 text-muted-foreground transition-transform group-open:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" /></svg>
+          </summary>
+          <div class="px-6 pb-6 text-sm text-muted-foreground">Yes, you can use our inpainting feature to modify specific areas of an image, adjust colors and styles, or generate new variations based on an existing image. You can also upscale images for higher resolution output.</div>
+        </details>
+
+        <details class="group rounded-xl border border-border bg-card">
+          <summary class="flex cursor-pointer items-center justify-between p-6 font-semibold [&::-webkit-details-marker]:hidden">
+            How long does it take to generate an image?
+            <svg class="w-5 h-5 text-muted-foreground transition-transform group-open:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" /></svg>
+          </summary>
+          <div class="px-6 pb-6 text-sm text-muted-foreground">Most images are generated in 5-15 seconds depending on the complexity of the prompt and the selected resolution. Batch generations of 4 variations typically complete in under 30 seconds.</div>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="py-20 bg-gradient-to-b from-amber-500/5 to-orange-500/5">
+    <div class="max-w-3xl mx-auto px-4 sm:px-6 text-center">
+      <h2 class="text-3xl sm:text-4xl font-bold mb-4">Start creating stunning images today</h2>
+      <p class="text-lg text-muted-foreground mb-8">Join thousands of creators using {appName} to bring their visual ideas to life.</p>
+      <a href="/auth/register" class="inline-flex items-center justify-center h-12 px-8 rounded-lg bg-gradient-to-r from-amber-500 to-orange-500 text-white font-semibold hover:opacity-90 transition-opacity shadow-lg shadow-amber-500/25">
+        Get Started Free &rarr;
+      </a>
+    </div>
+  </section>
+</MarketingLayout>
